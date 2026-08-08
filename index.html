@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VR Code City — Visualización Inmersiva de Código en Realidad Virtual</title>
+  <meta name="description"
+    content="VR Code City: plataforma multijugador en Realidad Virtual Web que transforma repositorios de GitHub en ciudades 3D interactivas. Análisis de código asistido por IA.">
+  <meta name="author" content="Alumno TFG">
+  <meta name="keywords" content="VR, Code City, Realidad Virtual, WebXR, A-Frame, GitHub, análisis de código, TFG, IA">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/MiLogoVR.png">
+  <link rel="apple-touch-icon" href="assets/MiLogoVR.png">
+
+  <!-- Fonts: Inter as HelveticaNow substitute + JetBrains Mono for code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ======== KINETIC NAVIGATION ======== -->
+  <header class="minimal-nav" id="minimal-nav">
+    <a href="#" class="minimal-nav__logo">
+      <img src="assets/MiLogoVR.png" alt="VR Code City Logo">
+      <span>VR Code City</span>
+    </a>
+    <button class="minimal-nav__btn" id="kinetic-menu-open">
+      <span>MENÚ</span>
+    </button>
+  </header>
+
+  <!-- ======== KINETIC MENU OVERLAY ======== -->
+  <div class="kinetic-menu" id="kinetic-menu">
+    <div class="kinetic-menu__bg"></div>
+    <button class="kinetic-menu__close" id="kinetic-menu-close">CERRAR</button>
+    <div class="kinetic-menu__wrapper" id="kinetic-menu-wrapper">
+      <div class="kinetic-menu__inner" id="kinetic-menu-inner">
+        <!-- Elementos duplicados para el efecto de ruleta infinita (opcional, pero con GSAP lo haremos con drag/scroll) -->
+        <a href="#videos" class="kinetic-menu__item" data-text="DEMOS">DEMOS</a>
+        <a href="#memoria" class="kinetic-menu__item" data-text="MEMORIA">MEMORIA</a>
+        <a href="#features" class="kinetic-menu__item" data-text="CARACTERÍSTICAS">CARACTERÍSTICAS</a>
+        <a href="#techstack" class="kinetic-menu__item" data-text="TECH STACK">TECH STACK</a>
+        <a href="#setup" class="kinetic-menu__item" data-text="INSTALACIÓN">INSTALACIÓN</a>
+        <a href="https://github.com/mtcarlos/TFG" target="_blank" class="kinetic-menu__item"
+          data-text="GITHUB">GITHUB</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ======== 1. HERO SECTION ======== -->
+  <section class="section section--white hero" id="hero">
+    <canvas id="hero-canvas" class="hero__canvas"></canvas>
+    <div class="page-container">
+      <div class="hero__composition">
+        <div class="hero__text">
+          <h1>
+            <span class="hero__title-vr">VR</span>
+            <span class="hero__title-code-city">Code City</span>
+          </h1>
+          <p class="hero__subtitle">
+            Visualización espacial de repositorios y análisis de código multijugador en Realidad Virtual asistido por
+            IA.
+          </p>
+          <div class="hero__ctas">
+            <a href="https://mtcarlos.github.io/TFG/" target="_blank" rel="noopener noreferrer" class="btn-filled">
+              Probar Demo En Vivo
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                <path
+                  d="M3.75 2h3.5a.75.75 0 010 1.5H4.56l7.22 7.22a.75.75 0 11-1.06 1.06L3.5 4.56v2.69a.75.75 0 01-1.5 0v-3.5A1.75 1.75 0 013.75 2z" />
+              </svg>
+            </a>
+            <a href="#memoria" class="btn-ghost">
+              Leer Memoria TFG
+            </a>
+            <a href="https://github.com/mtcarlos/TFG" target="_blank" rel="noopener noreferrer" class="btn-ghost">
+              Ver Repositorio en GitHub
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                <path
+                  d="M3.75 2h3.5a.75.75 0 010 1.5H4.56l7.22 7.22a.75.75 0 11-1.06 1.06L3.5 4.56v2.69a.75.75 0 01-1.5 0v-3.5A1.75 1.75 0 013.75 2z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="hero__visual">
+          <img src="assets/MiLogoVR.png" alt="VR Code City Logo" class="hero__logo">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======== 2. VÍDEOS & DEMOS ======== -->
+  <section class="section section--gray" id="videos">
+    <div class="page-container">
+      <div class="section__title reveal">
+        <span class="tag tag--red">Demo</span>
+        <h2 class="text-heading" style="margin-top: var(--spacing-16);">Vídeo Explicativo</h2>
+      </div>
+      <div class="video-section__container reveal">
+        <div class="video-card" id="video-card-1" data-video-id="placeholder">
+          <img src="assets/PERSONAJE.png"
+            alt="Demo de VR Code City: Navegación espacial, The Oracle e interacción multijugador"
+            class="video-card__thumbnail">
+          <div class="video-card__overlay">
+            <div class="video-card__play">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="5,3 19,12 5,21" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="video-card__info">
+          <span class="tag tag--red">Demo Completa</span>
+          <h3 class="video-card__title">Navegación Espacial, The Oracle e Interacción Multijugador</h3>
+          <p class="video-card__desc">
+            Recorrido completo por la plataforma VR Code City: visualización de repositorios como ciudades 3D,
+            interacción con el agente de IA contextual (The Oracle) y sesión colaborativa multijugador en tiempo real
+            con WebRTC.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======== 3. MEMORIA DEL TFG ======== -->
+  <section class="section section--white" id="memoria">
+    <div class="page-container">
+      <div class="section__title reveal">
+        <span class="tag tag--red">Académico</span>
+        <h2 class="text-heading" style="margin-top: var(--spacing-16);">Memoria del TFG</h2>
+      </div>
+
+      <div class="reveal">
+        <div class="memoria__viewer">
+          <div class="memoria__viewer-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+            </svg>
+            <p class="text-body-sm">Visor de PDF — Disponible próximamente</p>
+          </div>
+        </div>
+        <div class="memoria__download">
+          <a href="#" class="btn-filled">
+            Descargar Memoria Oficial (PDF)
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+              <path
+                d="M2.75 14A1.75 1.75 0 011 12.25v-2.5a.75.75 0 011.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25v-2.5a.75.75 0 011.5 0v2.5A1.75 1.75 0 0113.25 14H2.75zM7.25 1.75a.75.75 0 011.5 0v7.44l1.97-1.97a.75.75 0 111.06 1.06l-3.25 3.25a.75.75 0 01-1.06 0L4.22 8.28a.75.75 0 011.06-1.06l1.97 1.97V1.75z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="memoria__cards reveal">
+        <div class="memoria__card">
+          <div class="memoria__card-label">
+            <span class="tag tag--black">01</span>
+          </div>
+          <h3 class="memoria__card-title">Objetivos</h3>
+          <p class="memoria__card-text">
+            Diseñar y desarrollar una plataforma WebXR multijugador que permita transformar repositorios de GitHub en
+            ciudades 3D interactivas, integrando un agente de IA contextual para el análisis colaborativo de código en
+            Realidad Virtual.
+          </p>
+        </div>
+        <div class="memoria__card">
+          <div class="memoria__card-label">
+            <span class="tag tag--black">02</span>
+          </div>
+          <h3 class="memoria__card-title">Metodología y Arquitectura</h3>
+          <p class="memoria__card-text">
+            Arquitectura cliente-servidor con A-Frame y Three.js en frontend, Node.js y Express en backend,
+            Networked-Aframe con Socket.io y EasyRTC para comunicación en tiempo real, y OpenRouter API para integración
+            de modelos de lenguaje.
+          </p>
+        </div>
+        <div class="memoria__card">
+          <div class="memoria__card-label">
+            <span class="tag tag--black">03</span>
+          </div>
+          <h3 class="memoria__card-title">Conclusiones y Trabajo Futuro</h3>
+          <p class="memoria__card-text">
+            La plataforma demuestra la viabilidad de la visualización espacial de código como herramienta de análisis.
+            Las iteraciones futuras integrarán herramientas de análisis estático más profundas y optimización del
+            renderizado para repositorios monolíticos de gran escala.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======== 4. CARACTERÍSTICAS TÉCNICAS ======== -->
+  <section class="section section--gray" id="features">
+    <div class="page-container">
+      <div class="section__title reveal">
+        <span class="tag tag--red">Plataforma</span>
+        <h2 class="text-heading" style="margin-top: var(--spacing-16);">Características Técnicas</h2>
+      </div>
+      <div class="grid-3 reveal">
+
+        <!-- Feature 1: Spatial Repository Mapping -->
+        <div class="feature-card">
+          <div class="feature-card__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="6" width="6" height="14" rx="0" />
+              <rect x="9" y="2" width="6" height="18" rx="0" />
+              <rect x="17" y="8" width="6" height="12" rx="0" />
+            </svg>
+          </div>
+          <h3 class="feature-card__title">Spatial Repository Mapping</h3>
+          <p class="feature-card__text">Conversión dinámica de repositorios de GitHub en ciudades 3D interactivas. Los
+            directorios se transforman en distritos y los archivos en edificios cuya altura representa las líneas de
+            código.</p>
+          <div class="feature-card__list">
+            <span class="feature-card__list-item">Modo Rayos X (heatmap temporal por commits)</span>
+            <span class="feature-card__list-item">Máquina del Tiempo (checkout de commits previos)</span>
+            <span class="feature-card__list-item">Métricas visuales por LOC</span>
+          </div>
+        </div>
+
+        <!-- Feature 2: The Oracle -->
+        <div class="feature-card">
+          <div class="feature-card__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <circle cx="12" cy="12" r="4" />
+              <line x1="12" y1="2" x2="12" y2="6" />
+              <line x1="12" y1="18" x2="12" y2="22" />
+              <line x1="2" y1="12" x2="6" y2="12" />
+              <line x1="18" y1="12" x2="22" y2="12" />
+            </svg>
+          </div>
+          <h3 class="feature-card__title">The Oracle — IA Contextual</h3>
+          <p class="feature-card__text">Asistente de inteligencia artificial integrado en el entorno VR. Utiliza RAG
+            guiado por la mirada del usuario para ofrecer análisis contextual en tiempo real a través de OpenRouter API.
+          </p>
+          <div class="feature-card__list">
+            <span class="feature-card__list-item">RAG basado en la dirección de mirada</span>
+            <span class="feature-card__list-item">Explicación de código y sugerencia de refactoring</span>
+            <span class="feature-card__list-item">Detección de bugs y dependencias</span>
+          </div>
+        </div>
+
+        <!-- Feature 3: Multiplayer -->
+        <div class="feature-card">
+          <div class="feature-card__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="7" r="4" />
+              <path d="M2 21v-2a4 4 0 014-4h6a4 4 0 014 4v2" />
+              <circle cx="19" cy="7" r="3" />
+              <path d="M22 21v-1.5a3 3 0 00-3-3h-1" />
+            </svg>
+          </div>
+          <h3 class="feature-card__title">Colaboración Multijugador</h3>
+          <p class="feature-card__text">Presencia compartida en tiempo real con avatares 3D, seguimiento de cabeza y
+            manos, y chat de voz P2P. Colabora con tu equipo como si recorrieran la misma ciudad física.</p>
+          <div class="feature-card__list">
+            <span class="feature-card__list-item">WebRTC con Networked-Aframe</span>
+            <span class="feature-card__list-item">Avatares con head/hand tracking</span>
+            <span class="feature-card__list-item">Chat de voz peer-to-peer</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======== 5. TECH STACK ======== -->
+  <section class="section section--white" id="techstack">
+    <div class="page-container">
+      <div class="section__title reveal">
+        <span class="tag tag--red">Tecnología</span>
+        <h2 class="text-heading" style="margin-top: var(--spacing-16);">Arquitectura y Tech Stack</h2>
+      </div>
+      <div class="reveal">
+        <div class="tech-manifesto text-heading-sm">
+          CONSTRUIMOS REALIDADES INMERSIVAS USANDO <span class="tech-keyword">THREE.JS</span> Y <span
+            class="tech-keyword">A-FRAME</span>.
+          NUESTROS CIMIENTOS SE APOYAN SOBRE LA LÓGICA ASÍNCRONA DE <span class="tech-keyword">NODE.JS</span> Y <span
+            class="tech-keyword">EXPRESS</span>,
+          MIENTRAS QUE LAS PRESENCIAS HUMANAS SE ENTRELAZAN A TRAVÉS DEL ANCHO DE BANDA CRUDO DE <span
+            class="tech-keyword">WEBRTC</span> Y <span class="tech-keyword">SOCKET.IO</span>.
+          ESTA METRÓPOLIS DIGITAL NO ESTÁ VACÍA; RESPIRA Y ENTIENDE GRACIAS A <span class="tech-keyword">OPENROUTER
+            API</span>, INYECTANDO <span class="tech-keyword">LLMS</span> DIRECTAMENTE EN EL CÓDIGO.
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======== 6. INSTALACIÓN & CONTROLES ======== -->
+  <section class="section section--gray" id="setup">
+    <div class="page-container">
+      <div class="section__title reveal">
+        <span class="tag tag--red">Guía</span>
+        <h2 class="text-heading" style="margin-top: var(--spacing-16);">Instalación y Controles</h2>
+      </div>
+
+      <div class="setup__columns reveal">
+
+        <!-- Left Column: Installation -->
+        <div>
+          <h3 class="text-heading-sm font-semibold" style="margin-bottom: var(--spacing-30);">Instalación Local</h3>
+          <div class="accordion" id="accordion-setup">
+
+            <div class="accordion__item">
+              <button class="accordion__header" aria-expanded="false">
+                <span>1. Clonar el repositorio</span>
+                <span class="accordion__icon">+</span>
+              </button>
+              <div class="accordion__body">
+                <div class="accordion__content">
+                  <div class="code-block"><span class="code-prompt">$</span> <span class="code-command">git clone
+                      https://github.com/mtcarlos/TFG.git</span>
+                    <span class="code-prompt">$</span> <span class="code-command">cd TFG</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion__item">
+              <button class="accordion__header" aria-expanded="false">
+                <span>2. Configurar variables de entorno</span>
+                <span class="accordion__icon">+</span>
+              </button>
+              <div class="accordion__body">
+                <div class="accordion__content">
+                  <p class="text-body-sm" style="margin-bottom: var(--spacing-12);">Crea un archivo <code>.env</code> en
+                    el directorio raíz:</p>
+                  <div class="code-block"><span class="code-comment"># .env</span>
+                    <span class="code-command">OPENROUTER_API_KEY=</span><span
+                      style="color:#e8c87a;">tu_api_key_aquí</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion__item">
+              <button class="accordion__header" aria-expanded="false">
+                <span>3. Instalar dependencias</span>
+                <span class="accordion__icon">+</span>
+              </button>
+              <div class="accordion__body">
+                <div class="accordion__content">
+                  <div class="code-block"><span class="code-prompt">$</span> <span class="code-command">npm
+                      install</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion__item">
+              <button class="accordion__header" aria-expanded="false">
+                <span>4. Iniciar el servidor</span>
+                <span class="accordion__icon">+</span>
+              </button>
+              <div class="accordion__body">
+                <div class="accordion__content">
+                  <div class="code-block"><span class="code-prompt">$</span> <span class="code-command">npm start</span>
+                    <span class="code-comment"># Abre http://localhost:8080 en un navegador Chromium</span>
+                  </div>
+                  <p class="text-body-sm" style="margin-top: var(--spacing-12); color: var(--color-pewter);">
+                    Nota: Para WebXR con cascos como Meta Quest, se requiere un túnel HTTPS seguro (ej. NGROK) o un
+                    certificado SSL local.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right Column: Controls -->
+        <div>
+          <h3 class="text-heading-sm font-semibold" style="margin-bottom: var(--spacing-30);">Controles</h3>
+          <div class="accordion" id="accordion-controls">
+
+            <div class="accordion__item accordion__item--open">
+              <button class="accordion__header" aria-expanded="true">
+                <span>Modo Escritorio (Teclado y Ratón)</span>
+                <span class="accordion__icon">+</span>
+              </button>
+              <div class="accordion__body" style="max-height: 400px;">
+                <div class="accordion__content">
+                  <div class="controls-grid">
+                    <span class="control-key">W A S D</span>
+                    <span class="control-desc">Movimiento</span>
+                    <span class="control-key">Ratón</span>
+                    <span class="control-desc">Mirar alrededor</span>
+                    <span class="control-key">O</span>
+                    <span class="control-desc">Activar / Desactivar The Oracle</span>
+                    <span class="control-key">ESC</span>
+                    <span class="control-desc">Pausa / Desenfocar</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion__item">
+              <button class="accordion__header" aria-expanded="false">
+                <span>Modo VR (HMD y Controladores)</span>
+                <span class="accordion__icon">+</span>
+              </button>
+              <div class="accordion__body">
+                <div class="accordion__content">
+                  <div class="controls-grid">
+                    <span class="control-key">Joy L</span>
+                    <span class="control-desc">Movimiento (volar / caminar)</span>
+                    <span class="control-key">Joy R</span>
+                    <span class="control-desc">Giro de cámara (Snap Turn)</span>
+                    <span class="control-key">Gatillo R</span>
+                    <span class="control-desc">Interactuar (láser + clic en edificios u Oracle)</span>
+                    <span class="control-key">X / Y</span>
+                    <span class="control-desc">Activar The Oracle (controlador izquierdo)</span>
+                    <span class="control-key">A / B</span>
+                    <span class="control-desc">Activar The Oracle (controlador derecho)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======== 7. FOOTER ======== -->
+  <footer class="footer" id="footer">
+    <div class="page-container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <img src="assets/MiLogo.png" alt="Logo" class="footer__logo">
+          <div class="footer__brand-text">
+            <strong>VR Code City</strong><br>
+            Immersive Code Analysis Environment<br>
+            Trabajo de Fin de Grado
+          </div>
+        </div>
+        <div class="footer__links">
+          <a href="https://github.com/mtcarlos/TFG" target="_blank" rel="noopener noreferrer"
+            class="footer__link">GitHub</a>
+          <a href="#" class="footer__link">LinkedIn</a>
+          <a href="#" class="footer__link">Licencia</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <div class="footer__credits">
+          Alumno: Carlos Malagón Tenorio<br>
+          Tutor/es: Jesús María González Barahona<br>
+          Universidad: Universidad Rey Juan Carlos
+        </div>
+        <div class="footer__copy">
+          © 2026 VR Code City. Todos los derechos reservados.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ======== VIDEO MODAL ======== -->
+  <div class="video-modal" id="video-modal">
+    <button class="video-modal__close" id="video-modal-close" aria-label="Cerrar vídeo">×</button>
+    <div class="video-modal__content" id="video-modal-content">
+      <video id="demo-video" controls preload="metadata">
+        <source src="assets/VIDEO_INTRO.mp4" type="video/mp4">
+        Tu navegador no soporta el elemento de vídeo.
+      </video>
+    </div>
+  </div>
+
+
+  <!-- ======== THE ORACLE WIDGET ======== -->
+  <div class="oracle-widget" id="oracle-widget">
+    <div class="oracle-widget__bubble" id="oracle-bubble">¡Bienvenido a VR Code City!</div>
+    <button class="oracle-widget__avatar" id="oracle-avatar">
+      <img src="assets/MiLogo.png" alt="The Oracle" id="oracle-img">
+    </button>
+  </div>
+
+  <!-- External Libraries (Three.js & GSAP) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
