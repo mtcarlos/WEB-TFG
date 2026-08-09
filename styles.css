@@ -621,7 +621,7 @@ h6 {
 
 .kinetic-menu__item {
   font-family: var(--font-heading);
-  font-size: clamp(60px, 12vw, 180px);
+  font-size: clamp(35px, 8vw, 80px);
   font-weight: 800;
   text-transform: uppercase;
   line-height: 0.9;
@@ -631,7 +631,7 @@ h6 {
   text-decoration: none;
   cursor: pointer;
   position: relative;
-  transition: color 0.3s ease, -webkit-text-stroke 0.3s ease, transform 0.3s ease;
+  transition: color 0.5s ease, -webkit-text-stroke 0.3s ease, transform 0.3s ease;
   padding: var(--spacing-10) 0;
   transform-style: preserve-3d;
   will-change: transform, color;
