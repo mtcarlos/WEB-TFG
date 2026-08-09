@@ -30,7 +30,8 @@ html {
   /* Typography — Font Family */
   --font-heading: 'Syne', sans-serif;
   --font-body: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-helveticanow: var(--font-body); /* Alias for backward compatibility */
+  --font-helveticanow: var(--font-body);
+  /* Alias for backward compatibility */
 
   /* Typography — Scale */
   --text-caption: 14px;
@@ -267,7 +268,12 @@ ol {
 
 
 /* ---- TYPOGRAPHY CLASSES ---- */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
 }
 
