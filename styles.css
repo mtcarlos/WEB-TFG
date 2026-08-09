@@ -28,7 +28,9 @@ html {
   --color-signal-red: #ff0000;
 
   /* Typography — Font Family */
-  --font-helveticanow: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: 'Syne', sans-serif;
+  --font-body: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-helveticanow: var(--font-body); /* Alias for backward compatibility */
 
   /* Typography — Scale */
   --text-caption: 14px;
@@ -170,6 +172,7 @@ html {
   body.custom-cursor-enabled {
     cursor: none;
   }
+
   body.custom-cursor-enabled * {
     cursor: none !important;
   }
@@ -177,8 +180,10 @@ html {
 
 .custom-cursor {
   position: fixed;
-  top: 0; left: 0;
-  width: 36px; height: 36px;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
   pointer-events: none;
   z-index: 99999;
   display: none;
@@ -195,20 +200,24 @@ html {
 
 .custom-cursor__inner {
   position: relative;
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   transition: transform 0.1s cubic-bezier(0.19, 1, 0.22, 1);
   /* Offset to align pointer finger tip with actual mouse X,Y */
-  transform: translate(-11px, -5px); 
+  transform: translate(-11px, -5px);
 }
 
 .custom-cursor.is-active .custom-cursor__inner {
   transform: translate(-11px, -5px) scale(0.8) rotate(-10deg);
 }
 
-.custom-cursor__open, .custom-cursor__pointer {
+.custom-cursor__open,
+.custom-cursor__pointer {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   transition: opacity 0.15s ease, transform 0.15s ease;
   filter: drop-shadow(3px 3px 0px var(--color-charcoal-ink));
 }
@@ -258,7 +267,12 @@ ol {
 
 
 /* ---- TYPOGRAPHY CLASSES ---- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
 .text-display {
+  font-family: var(--font-heading);
   font-size: clamp(60px, 12vw, var(--text-display));
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
@@ -266,6 +280,7 @@ ol {
 }
 
 .text-heading-lg {
+  font-family: var(--font-heading);
   font-size: clamp(32px, 5vw, var(--text-heading-lg));
   line-height: var(--leading-heading-lg);
   letter-spacing: var(--tracking-heading-lg);
@@ -273,6 +288,7 @@ ol {
 }
 
 .text-heading {
+  font-family: var(--font-heading);
   font-size: clamp(28px, 4.5vw, var(--text-heading));
   line-height: var(--leading-heading);
   letter-spacing: var(--tracking-heading);
@@ -280,6 +296,7 @@ ol {
 }
 
 .text-heading-sm {
+  font-family: var(--font-heading);
   font-size: clamp(24px, 3vw, var(--text-heading-sm));
   line-height: var(--leading-heading-sm);
   letter-spacing: var(--tracking-heading-sm);
@@ -597,6 +614,7 @@ ol {
 }
 
 .kinetic-menu__item {
+  font-family: var(--font-heading);
   font-size: clamp(60px, 12vw, 180px);
   font-weight: 800;
   text-transform: uppercase;
@@ -704,18 +722,20 @@ ol {
 }
 
 .hero__title-vr {
+  font-family: var(--font-heading);
   font-size: clamp(80px, 16vw, 200px);
   line-height: 0.85;
   letter-spacing: -0.05em;
-  font-weight: var(--font-weight-regular);
+  font-weight: 800;
   margin-bottom: var(--spacing-8);
 }
 
 .hero__title-code-city {
+  font-family: var(--font-heading);
   font-size: clamp(40px, 7vw, 90px);
   line-height: 0.93;
   letter-spacing: -0.04em;
-  font-weight: var(--font-weight-regular);
+  font-weight: 800;
   margin-bottom: var(--spacing-35);
 }
 
@@ -742,7 +762,6 @@ ol {
 .hero__logo {
   width: clamp(200px, 24vw, 340px);
   height: auto;
-  opacity: 0.9;
 }
 
 .hero__vertical-text {

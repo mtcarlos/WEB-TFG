@@ -209,8 +209,8 @@
 
     const scene = new THREE.Scene();
     // Transparent background to let the CSS paper white show through
-    scene.background = null; 
-    
+    scene.background = null;
+
     // Add subtle fog to blend distant buildings into the white background
     scene.fog = new THREE.FogExp2(0xffffff, 0.012);
 
@@ -221,23 +221,23 @@
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     const group = new THREE.Group();
-    
+
     // Base geometry for buildings
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    
+
     // Solid white material for the interior
     const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
-    
+
     // Edges geometry for the thick black cartoon outlines
     const edgesGeometry = new THREE.EdgesGeometry(geometry);
-    const edgesMaterial = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 2 }); 
+    const edgesMaterial = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 2 });
 
     // Array to hold building references for animation
     const buildings = [];
 
     for (let i = 0; i < 80; i++) {
       const mesh = new THREE.Mesh(geometry, material);
-      
+
       // Add black outlines as a child of the mesh
       const edges = new THREE.LineSegments(edgesGeometry, edgesMaterial);
       mesh.add(edges);
@@ -249,11 +249,11 @@
       const scaleX = Math.random() * 3 + 1.5;
       const scaleZ = Math.random() * 3 + 1.5;
       const scaleY = Math.random() * 12 + 3;
-      
+
       mesh.scale.set(scaleX, scaleY, scaleZ);
 
       group.add(mesh);
-      
+
       buildings.push({
         mesh: mesh,
         baseScaleX: scaleX,
@@ -292,7 +292,7 @@
 
     function animate() {
       requestAnimationFrame(animate);
-      
+
       const time = clock.getElapsedTime();
 
       targetX = mouseX * 2;
@@ -310,11 +310,11 @@
       buildings.forEach(b => {
         // Sine wave oscillating between -1 and 1
         const wave = Math.sin(time * b.speed + b.phase);
-        
+
         // Stretch Y (10%), Squash X and Z (5%) to maintain visual volume
-        const stretchY = 1 + wave * 0.10; 
-        const squashXZ = 1 - wave * 0.05; 
-        
+        const stretchY = 1 + wave * 0.10;
+        const squashXZ = 1 - wave * 0.05;
+
         b.mesh.scale.y = b.baseScaleY * stretchY;
         b.mesh.scale.x = b.baseScaleX * squashXZ;
         b.mesh.scale.z = b.baseScaleZ * squashXZ;
@@ -433,13 +433,13 @@
     const windowHalfY = window.innerHeight / 2;
 
     document.addEventListener('mousemove', (e) => {
-      const mouseX = (e.clientX - windowHalfX) / windowHalfX; 
-      const mouseY = (e.clientY - windowHalfY) / windowHalfY; 
+      const mouseX = (e.clientX - windowHalfX) / windowHalfX;
+      const mouseY = (e.clientY - windowHalfY) / windowHalfY;
 
       // Pan the image X and Y by up to 12px
       const translateX = mouseX * 12;
       const translateY = mouseY * 12;
-      
+
       oracleImg.style.transform = `translate(${translateX}px, ${translateY}px)`;
     });
 
@@ -476,13 +476,13 @@
         oracleBubble.classList.add('is-visible');
         return;
       }
-      
+
       oracleBubble.classList.remove('is-visible');
-      
+
       setTimeout(() => {
         oracleBubble.textContent = text;
         oracleBubble.classList.add('is-visible');
-        
+
         // Auto-hide after 5 seconds to not block UI forever
         clearTimeout(hideTimeout);
         hideTimeout = setTimeout(() => {
