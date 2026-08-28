@@ -178,26 +178,26 @@
       { y: 30, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }
     )
-    .fromTo('.gallery-hero__title',
-      { y: 80, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: 'power4.out' },
-      '-=0.3'
-    )
-    .fromTo('.gallery-hero__subtitle',
-      { y: 40, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-      '-=0.6'
-    )
-    .fromTo('.gallery-hero__back',
-      { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' },
-      '-=0.4'
-    )
-    .fromTo('.gallery-hero__character',
-      { x: 60, opacity: 0, rotation: 5 },
-      { x: 0, opacity: 1, rotation: 0, duration: 1, ease: 'back.out(1.4)' },
-      '-=0.8'
-    );
+      .fromTo('.gallery-hero__title',
+        { y: 80, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: 'power4.out' },
+        '-=0.3'
+      )
+      .fromTo('.gallery-hero__subtitle',
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
+        '-=0.6'
+      )
+      .fromTo('.gallery-hero__back',
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' },
+        '-=0.4'
+      )
+      .fromTo('.gallery-hero__character',
+        { x: 60, opacity: 0, rotation: 5 },
+        { x: 0, opacity: 1, rotation: 0, duration: 1, ease: 'back.out(1.4)' },
+        '-=0.8'
+      );
 
     // Gallery cards staggered reveal
     const cards = document.querySelectorAll('.gallery-card');

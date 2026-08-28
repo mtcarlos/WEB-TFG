@@ -4,97 +4,185 @@
    ============================================================ */
 
 
-/* ---- GALLERY HERO ---- */
+/* ======== GALLERY HERO (POLAROID) ======== */
 .gallery-hero {
-  min-height: 60vh;
-  display: flex;
-  align-items: flex-end;
-  padding-top: 100px;
-  padding-bottom: 60px;
   position: relative;
+  min-height: 90vh; 
+  display: flex;
+  align-items: center;
+  padding-top: var(--spacing-60);
+  padding-bottom: var(--spacing-60);
   overflow: hidden;
-  background-color: var(--color-charcoal-ink);
-  color: var(--color-paper-white);
+  background-color: var(--color-newsprint-gray);
+  color: var(--color-charcoal-ink);
+}
+
+.gallery-hero__watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-heading);
+  font-size: clamp(80px, 18vw, 300px);
+  font-weight: 800;
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-newsprint-gray);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+  letter-spacing: -0.05em;
+  user-select: none;
 }
 
 .gallery-hero__layout {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: var(--spacing-40);
-  width: 100%;
-}
-
-.gallery-hero__text {
-  position: relative;
-  z-index: 2;
-  flex: 1;
-}
-
-.gallery-hero__tag {
-  color: var(--color-signal-red);
-  border-color: var(--color-signal-red);
-}
-
-.gallery-hero__title {
-  font-family: var(--font-heading);
-  font-size: clamp(60px, 12vw, 150px);
-  font-weight: 800;
-  line-height: 0.9;
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
-  margin-top: var(--spacing-16);
-}
-
-.gallery-hero__subtitle {
-  font-size: var(--text-subheading);
-  line-height: var(--leading-subheading);
-  letter-spacing: var(--tracking-subheading);
-  color: var(--color-pewter);
-  max-width: 500px;
-  margin-top: var(--spacing-25);
-}
-
-.gallery-hero__back {
-  display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  gap: var(--spacing-8);
-  margin-top: var(--spacing-30);
-  color: var(--color-paper-white);
-  border-color: var(--color-paper-white);
-  background: transparent;
-  box-shadow: 4px 4px 0px var(--color-paper-white);
-}
-
-.gallery-hero__back:hover {
-  background-color: var(--color-paper-white);
-  color: var(--color-charcoal-ink);
-  box-shadow: 6px 6px 0px var(--color-paper-white);
-
-}
-
-.gallery-hero__back:active {
-  box-shadow: 0px 0px 0px var(--color-paper-white);
-}
-
-/* Character in the hero */
-.gallery-hero__character {
-
+  gap: var(--spacing-30);
+  width: 100%;
   position: relative;
   z-index: 2;
-  flex-shrink: 0;
-  width: clamp(140px, 18vw, 240px);
-  align-self: flex-end;
 }
 
-.gallery-hero__character img {
+/* ---- POLAROID STACK TITLE ---- */
+.gallery-polaroid-title {
+  position: relative;
   width: 100%;
-  height: auto;
+  height: 280px;
+  /* Espacio vertical para las cartas */
+  display: flex;
+  justify-content: center;
+  /* Centrado horizontal del contenedor */
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  margin-top: var(--spacing-40);
+}
+
+.polaroid-card {
+  position: absolute;
+  left: 50%;
+  margin-left: -55px;
+  width: 110px;
+  /* Textura fotográfica física inyectada (SVG Noise) */
+  background: #fdfdfc url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.20'/%3E%3C/svg%3E");
+  padding: 10px 10px 30px 10px;
+  border: 3px solid var(--color-charcoal-ink);
+  box-shadow: 2px 2px 0px var(--color-charcoal-ink), 8px 12px 25px rgba(0, 0, 0, 0.3);
+  transform: rotate(var(--r)) translateX(0) scale(1);
+  transform-origin: center;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: var(--i);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hover State: The Spread */
+.gallery-polaroid-title:hover .polaroid-card {
+  transform: translateX(calc((var(--i) - 3.5) * 120px)) rotate(calc(var(--r) * 0.3)) scale(1.05);
+  box-shadow: 8px 8px 0px var(--color-charcoal-ink), 25px 40px 60px rgba(0, 0, 0, 0.5);
+  /* Sombra dramática extrema */
+}
+
+/* Cintas Individuales Dinámicas */
+.polaroid-tape-mini {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-4deg);
+  width: 50px;
+  height: 25px;
+  background: rgba(220, 220, 220, 0.85);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 50;
+  border-left: 2px dashed rgba(0, 0, 0, 0.3);
+  border-right: 2px dashed rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  /* Invisible por defecto */
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Al expandirse, las cintas aparecen progresivamente */
+.gallery-polaroid-title:hover .polaroid-tape-mini {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  transition-delay: calc(0.3s + (var(--i) * 0.04s));
+  /* Aparece al llegar la carta */
+}
+
+.polaroid-card__inner {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  border: 2px solid var(--color-charcoal-ink);
+  background: var(--color-paper-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Efecto de Brillo Animado Extremo (Glare) */
+.polaroid-card__inner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -150%;
+  width: 100%;
+  /* Barrido de luz diagonal muy intenso */
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%);
+  transform: skewX(-20deg);
+  pointer-events: none;
+  z-index: 5;
+  transition: left 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.gallery-polaroid-title:hover .polaroid-card__inner::after {
+  left: 150%;
+  transition-delay: calc(var(--i) * 0.05s);
+  /* Barrido consecutivo por las cartas */
+}
+
+.polaroid-card--letter .polaroid-card__inner {
+  font-family: 'Special Elite', monospace;
+  font-size: 80px;
+  font-weight: 400;
+  /* Special Elite solo tiene peso 400 */
+  /* Efecto sello de tinta: Ligera transparencia y pequeñísimo difuminado */
+  color: rgba(42, 42, 42, 0.9);
+  text-shadow: 1px 1px 3px rgba(42, 42, 42, 0.2);
+}
+
+.polaroid-card--image {
+  width: 160px;
+  /* La foto final es un poco más grande */
+  padding: 10px 10px 40px 10px;
+}
+
+.polaroid-card--image .polaroid-card__inner {
+  height: 160px;
+  overflow: hidden;
+}
+
+.polaroid-card--image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
-  transform: scaleX(-1);
-  filter: drop-shadow(-6px 6px 0px rgba(255, 255, 255, 0.15));
-  /* Invert colors so the character pops on dark bg */
-  filter: brightness(1.1) drop-shadow(-6px 6px 0px rgba(255, 255, 255, 0.1));
+}
+
+.polaroid-card__caption {
+  font-family: 'Rock Salt', cursive;
+  font-size: 14px;
+  color: var(--color-charcoal-ink);
+  margin-top: 10px;
+  text-align: center;
+  transform: rotate(-3deg);
+  opacity: 0.9;
 }
 
 /* Decorative noise overlay for the hero */

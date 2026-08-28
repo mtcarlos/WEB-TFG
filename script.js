@@ -220,13 +220,48 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
+    // Activar sombras para conseguir iluminación dura
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
     const group = new THREE.Group();
+
+    // Iluminación de Atardecer (Sunset)
+    const ambientLight = new THREE.AmbientLight(0x404055, 0.7); // Luz ambiente fría/azulada
+    scene.add(ambientLight);
+
+    const dirLight = new THREE.DirectionalLight(0xff8c42, 1.5); // Sol cálido y anaranjado
+    // Sol más bajo en el horizonte (Y=8) para generar sombras largas
+    dirLight.position.set(20, 8, 15);
+    dirLight.castShadow = true;
+    dirLight.shadow.mapSize.width = 2048;
+    dirLight.shadow.mapSize.height = 2048;
+    dirLight.shadow.camera.near = 0.5;
+    dirLight.shadow.camera.far = 50;
+    dirLight.shadow.camera.left = -20;
+    dirLight.shadow.camera.right = 20;
+    dirLight.shadow.camera.top = 20;
+    dirLight.shadow.camera.bottom = -20;
+    scene.add(dirLight);
+
+    // Suelo para recibir las sombras
+    const planeGeometry = new THREE.PlaneGeometry(200, 200);
+    const planeMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 1 });
+    const ground = new THREE.Mesh(planeGeometry, planeMaterial);
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -6; // Justo por debajo de los edificios
+    ground.receiveShadow = true;
+    scene.add(ground);
 
     // Base geometry for buildings
     const geometry = new THREE.BoxGeometry(1, 1, 1);
 
-    // Solid white material for the interior
-    const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    // Material reactivo a la luz para los edificios
+    const material = new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      roughness: 0.7,
+      metalness: 0.1
+    });
 
     // Edges geometry for the thick black cartoon outlines
     const edgesGeometry = new THREE.EdgesGeometry(geometry);
@@ -251,6 +286,8 @@
       const scaleY = Math.random() * 12 + 3;
 
       mesh.scale.set(scaleX, scaleY, scaleZ);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
 
       group.add(mesh);
 
@@ -407,10 +444,39 @@
     }
   }
 
+  // ---- HERO PARALLAX (Option 2) ----
+  function initHeroParallax() {
+    const heroText = document.querySelector('.hero__text');
+    if (!heroText || typeof gsap === 'undefined') return;
+
+    const windowHalfX = window.innerWidth / 2;
+    const windowHalfY = window.innerHeight / 2;
+
+    document.addEventListener('mousemove', (e) => {
+      // Normalizar coordenadas (-1 a 1)
+      const x = (e.clientX - windowHalfX) / windowHalfX;
+      const y = (e.clientY - windowHalfY) / windowHalfY;
+
+      // Efecto parallax opuesto a la cámara 3D
+      gsap.to(heroText, {
+        x: x * -50,
+        y: y * -30,
+        rotationY: x * 15,
+        rotationX: y * -15,
+        ease: 'power2.out',
+        duration: 0.8
+      });
+    });
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initGSAP);
+    document.addEventListener('DOMContentLoaded', () => {
+      initGSAP();
+      initHeroParallax();
+    });
   } else {
     initGSAP();
+    initHeroParallax();
   }
 
 
