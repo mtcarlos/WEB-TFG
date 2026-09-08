@@ -632,7 +632,8 @@ h6 {
 .kinetic-menu__inner {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Alineación a la izquierda para los números */
+  align-items: flex-start;
+  /* Alineación a la izquierda para los números */
   will-change: transform;
 }
 
@@ -648,7 +649,8 @@ h6 {
 }
 
 .kinetic-menu__item:hover {
-  transform: translateX(15px); /* Desplazamiento elegante en lugar de 3D */
+  transform: translateX(15px);
+  /* Desplazamiento elegante en lugar de 3D */
 }
 
 .kinetic-menu__num {
@@ -681,7 +683,8 @@ h6 {
   overflow: hidden;
   transition: width 0.5s cubic-bezier(0.19, 1, 0.22, 1);
   white-space: nowrap;
-  text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.4); /* Brillo premium animado */
+  text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.4);
+  /* Brillo premium animado */
 }
 
 .kinetic-menu__item:hover .kinetic-menu__text::before {
@@ -1221,8 +1224,11 @@ h6 {
   font-size: var(--text-caption);
   line-height: 1.7;
   overflow-x: auto;
-  white-space: pre;
   margin-bottom: var(--spacing-16);
+}
+
+.code-line {
+  display: block;
 }
 
 .code-block .code-comment {

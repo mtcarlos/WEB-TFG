@@ -8,7 +8,7 @@ El sitio debe actuar como landing page promocional y portal académico del proye
 
 - **Nombre del Proyecto:** VR Code City: Immersive Code Analysis Environment (TFG).
 - **Descripción General:** Plataforma multijugador en Realidad Virtual Web (WebVR/WebXR) que transforma la análisis de código en una experiencia espacial, convirtiendo repositorios de GitHub en ciudades 3D interactivas.
-- **Tecnologías Clave:** A-Frame, Three.js, WebXR, Node.js, Express, Networked-Aframe, Socket.io, EasyRTC (P2P), OpenRouter API (LLMs para IA).
+- **Tecnologías Clave:** A-Frame, Three.js, WebXR, Node.js, Express, Networked-Aframe, Socket.io, EasyRTC (P2P), Google Gemini API, Python Microservice.
 
 ---
 
@@ -39,7 +39,7 @@ El sitio debe actuar como landing page promocional y portal académico del proye
 4. **CARACTERÍSTICAS TÉCNICAS (Feature Breakdown):**
    - Tarjetas interactivas que expliquen las 3 columnas del proyecto:
      - **Spatial Repository Mapping:** Conversión de directorios a distritos y archivos a edificios 3D según métricas de LOC. Modo Rayos X y time-travel por commits.
-     - **The Oracle (Context-Aware AI):** Asistente IA integrado en VR con RAG guiado por la mirada del usuario mediante OpenRouter API.
+     - **The Oracle (Context-Aware AI):** Asistente IA integrado en VR con RAG guiado por la mirada del usuario mediante la API de Google Gemini y un microservicio en Python.
      - **Multiplayer Collaboration:** Presencia compartida, seguimiento de cabeza/manos (WebRTC) y chat de voz P2P.
 
 5. **ARQUITECTURA Y TECH STACK (Grilla Visual de Tecnologías):**
@@ -47,10 +47,10 @@ El sitio debe actuar como landing page promocional y portal académico del proye
      - *Frontend 3D/VR:* A-Frame, Three.js, WebXR API.
      - *Backend & Git:* Node.js, Express, simple-git.
      - *Red & Tiempo Real:* Networked-Aframe, Socket.io, EasyRTC.
-     - *Inteligencia Artificial:* OpenRouter API (Gemma / LLMs).
+     - *Inteligencia Artificial:* Google Gemini API, Python Microservice.
 
 6. **INSTRUCCIONES DE INSTALACIÓN Y GUÍA DE CONTROLES:**
-   - Acordeón interactivo o bloque estilo terminal de comandos con los pasos para clonar el repositorio y ejecutar localmente (`npm install`, `npm start`, configuración `.env` con OPENROUTER_API_KEY).
+   - Acordeón interactivo o bloque estilo terminal de comandos con los pasos para clonar el repositorio y ejecutar localmente (`npm install`, `npm start`, configuración `.env` con GEMINI_API_KEY).
    - Guía de controles diferenciada para **Modo Escritorio** (Teclado/Ratón: WASD, Tecla O) y **Modo VR (HMD/Meta Quest)** (Joysticks, Gatillos y Botones X/Y).
 
 7. **FOOTER & AUTORÍA:**
