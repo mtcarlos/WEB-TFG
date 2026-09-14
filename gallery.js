@@ -46,7 +46,7 @@
       videoGallery.style.display = 'grid';
       imageGallery.style.display = 'none';
       if (galleryHeading) galleryHeading.textContent = 'La Ciudad en Vídeos';
-      if (galleryCount) galleryCount.textContent = '01 vídeo';
+      if (galleryCount) galleryCount.textContent = '02 vídeos';
     });
   }
 
