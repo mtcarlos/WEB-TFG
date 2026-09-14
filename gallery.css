@@ -229,6 +229,36 @@
   margin-bottom: var(--spacing-50);
 }
 
+.gallery-section__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-20);
+}
+
+.gallery-toggle {
+  display: flex;
+  border: 2px solid var(--color-charcoal-ink);
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.gallery-toggle__btn {
+  padding: 8px 20px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-body-sm);
+  color: var(--color-charcoal-ink);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.gallery-toggle__btn.is-active {
+  background: var(--color-charcoal-ink);
+  color: var(--color-paper-white);
+}
+
 .gallery-section__count {
   font-family: var(--font-heading);
   font-size: var(--text-heading-sm);

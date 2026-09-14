@@ -8,7 +8,7 @@
 
   // ---- GALLERY DATA ----
   // Each image has a src, caption, and a character comment
-  const galleryItems = document.querySelectorAll('.gallery-card');
+  const galleryItems = document.querySelectorAll('#image-gallery .gallery-card');
   const lightbox = document.getElementById('gallery-lightbox');
   const lightboxImage = document.getElementById('lightbox-image');
   const lightboxCaption = document.getElementById('lightbox-caption');
@@ -21,6 +21,34 @@
 
   let currentIndex = 0;
   let isLightboxOpen = false;
+
+  // ---- TOGGLE LOGIC ----
+  const btnShowImages = document.getElementById('btn-show-images');
+  const btnShowVideos = document.getElementById('btn-show-videos');
+  const imageGallery = document.getElementById('image-gallery');
+  const videoGallery = document.getElementById('video-gallery');
+  const galleryHeading = document.getElementById('gallery-heading');
+  const galleryCount = document.getElementById('gallery-count');
+
+  if (btnShowImages && btnShowVideos) {
+    btnShowImages.addEventListener('click', function() {
+      btnShowImages.classList.add('is-active');
+      btnShowVideos.classList.remove('is-active');
+      imageGallery.style.display = 'grid';
+      videoGallery.style.display = 'none';
+      if (galleryHeading) galleryHeading.textContent = 'La Ciudad en Imágenes';
+      if (galleryCount) galleryCount.textContent = '08 capturas';
+    });
+
+    btnShowVideos.addEventListener('click', function() {
+      btnShowVideos.classList.add('is-active');
+      btnShowImages.classList.remove('is-active');
+      videoGallery.style.display = 'grid';
+      imageGallery.style.display = 'none';
+      if (galleryHeading) galleryHeading.textContent = 'La Ciudad en Vídeos';
+      if (galleryCount) galleryCount.textContent = '01 vídeo';
+    });
+  }
 
   // ---- CHARACTER GUIDE COMMENTS ----
   const characterComments = [

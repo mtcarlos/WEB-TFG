@@ -137,14 +137,14 @@
   <section class="section section--gray" id="videos">
     <div class="page-container">
       <div class="section__title reveal">
-        <span class="tag tag--red">Demo</span>
-        <h2 class="text-heading" style="margin-top: var(--spacing-16);">Vídeo Explicativo</h2>
+        <span class="tag tag--red">Tráiler</span>
+        <h2 class="text-heading" style="margin-top: var(--spacing-16);">Tráiler Oficial</h2>
       </div>
       <div class="video-section__container reveal">
         <div class="video-card" id="video-card-1" data-video-id="placeholder">
-          <img src="assets/PERSONAJE.png"
-            alt="Demo de VR Code City: Navegación espacial, The Oracle e interacción multijugador"
-            class="video-card__thumbnail">
+          <video src="assets/videos/trailer_TFG.mp4#t=0.1"
+            class="video-card__thumbnail" style="object-fit: cover; width: 100%; height: 100%;"
+            preload="metadata" muted playsinline></video>
           <div class="video-card__overlay">
             <div class="video-card__play">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -154,13 +154,16 @@
           </div>
         </div>
         <div class="video-card__info">
-          <span class="tag tag--red">Demo Completa</span>
-          <h3 class="video-card__title">Navegación Espacial, The Oracle e Interacción Multijugador</h3>
-          <p class="video-card__desc">
-            Recorrido completo por la plataforma VR Code City: visualización de repositorios como ciudades 3D,
-            interacción con el agente de IA contextual (The Oracle) y sesión colaborativa multijugador en tiempo real
-            con WebRTC.
-          </p>
+          <h3 class="video-card__title">Descubre la Ciudad de Código</h3>
+
+          <a href="galeria.html" class="btn-ghost"
+            style="margin-top: var(--spacing-20); display: inline-flex; align-items: center; gap: 8px;">
+            Ver en la Galería
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
         </div>
       </div>
     </div>
@@ -567,7 +570,7 @@
     <button class="video-modal__close" id="video-modal-close" aria-label="Cerrar vídeo">×</button>
     <div class="video-modal__content" id="video-modal-content">
       <video id="demo-video" controls preload="metadata">
-        <source src="assets/videotutorial.mp4" type="video/mp4">
+        <source src="assets/videos/trailer_TFG.mp4" type="video/mp4">
         Tu navegador no soporta el elemento de vídeo.
       </video>
     </div>
