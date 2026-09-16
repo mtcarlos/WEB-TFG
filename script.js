@@ -8,85 +8,67 @@
   'use strict';
 
   // ---- DOM REFERENCES ----
-  const kineticMenuOpen = document.getElementById('kinetic-menu-open');
-  const kineticMenuClose = document.getElementById('kinetic-menu-close');
-  const kineticMenu = document.getElementById('kinetic-menu');
-  const kineticMenuInner = document.getElementById('kinetic-menu-inner');
-  const kineticMenuItems = document.querySelectorAll('.kinetic-menu__item');
   const videoCards = document.querySelectorAll('.video-card');
   const videoModal = document.getElementById('video-modal');
   const videoModalClose = document.getElementById('video-modal-close');
   const videoModalContent = document.getElementById('video-modal-content');
 
-  // ---- KINETIC MENU LOGIC ----
-  if (kineticMenu && kineticMenuOpen && kineticMenuClose) {
-    let targetY = 0;
-    let currentY = 0;
-    let targetSkew = 0;
-    let currentSkew = 0;
-    let isMenuOpen = false;
+  // ---- SECTION DOTS NAVIGATION ----
+  const sectionDots = document.querySelectorAll('.section-dot[data-section]');
 
-    kineticMenuOpen.addEventListener('click', () => {
-      kineticMenu.classList.add('is-active');
-      document.body.style.overflow = 'hidden';
-      isMenuOpen = true;
-
-      // Animate items in
-      gsap.fromTo(kineticMenuItems,
-        { y: 100, opacity: 0, rotateX: 45 },
-        { y: 0, opacity: 1, rotateX: 0, duration: 0.8, stagger: 0.05, ease: 'power3.out', delay: 0.4 }
-      );
-    });
-
-    const closeMenu = () => {
-      kineticMenu.classList.remove('is-active');
-      document.body.style.overflow = '';
-      isMenuOpen = false;
-    };
-
-    kineticMenuClose.addEventListener('click', closeMenu);
-
-    kineticMenuItems.forEach(item => {
-      item.addEventListener('click', closeMenu);
-    });
-
-    // Mouse movement to scroll and distort the menu
-    window.addEventListener('mousemove', (e) => {
-      if (!isMenuOpen || !kineticMenuInner) return;
-
-      const windowHeight = window.innerHeight;
-      // Normalizamos la posición del ratón de 0 a 1
-      const progress = e.clientY / windowHeight;
-
-      const menuHeight = kineticMenuInner.getBoundingClientRect().height;
-      // Calculamos cuánto podemos hacer scroll
-      const maxScroll = Math.max(0, menuHeight - windowHeight + 300);
-
-      // Mapeamos el movimiento del ratón al scroll (-maxScroll/2 a maxScroll/2)
-      targetY = - (progress * maxScroll - (maxScroll / 2));
-
-      // La inclinación (skew) se basa en la velocidad simulada
-      targetSkew = (currentY - targetY) * 0.15;
-      targetSkew = Math.max(-12, Math.min(12, targetSkew));
-    });
-
-    // Bucle de animación (RequestAnimationFrame + GSAP)
-    const renderKineticMenu = () => {
-      if (isMenuOpen && kineticMenuInner) {
-        // Interpolación lineal para movimiento suave (Lerp)
-        currentY += (targetY - currentY) * 0.08;
-        currentSkew += (targetSkew - currentSkew) * 0.08;
-
-        targetSkew *= 0.9; // Fricción para que vuelva a 0
-
-        gsap.set(kineticMenuInner, {
-          y: currentY,
-          skewY: currentSkew
-        });
+  if (sectionDots.length) {
+    // Collect section IDs that exist on this page (exclude external links like galeria)
+    const sectionIds = [];
+    sectionDots.forEach(dot => {
+      const id = dot.dataset.section;
+      if (document.getElementById(id)) {
+        sectionIds.push(id);
       }
-      requestAnimationFrame(renderKineticMenu);
+    });
+
+    // IntersectionObserver to detect which section is in view
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.3
     };
-    renderKineticMenu();
+
+    const setActiveDot = (sectionId) => {
+      sectionDots.forEach(dot => {
+        dot.classList.toggle('is-active', dot.dataset.section === sectionId);
+      });
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveDot(entry.target.id);
+        }
+      });
+    }, observerOptions);
+
+    sectionIds.forEach(id => {
+      const section = document.getElementById(id);
+      if (section) sectionObserver.observe(section);
+    });
+
+    // Click handler — smooth scroll for on-page sections
+    sectionDots.forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        const sectionId = dot.dataset.section;
+        const target = document.getElementById(sectionId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        // If no target (e.g. galeria.html), let the default link behavior work
+      });
+    });
+
+    // Set initial active state
+    if (sectionIds.length) {
+      setActiveDot(sectionIds[0]);
+    }
   }
 
 

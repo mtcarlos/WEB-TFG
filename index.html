@@ -26,66 +26,99 @@
 
 <body>
 
-  <!-- ======== KINETIC NAVIGATION ======== -->
+  <!-- ======== HEADER (Logo + GitHub) ======== -->
   <header class="minimal-nav" id="minimal-nav">
     <a href="#" class="minimal-nav__logo">
       <img src="assets/MiLogoVR.png" alt="VR Code City Logo">
       <span>VR Code City</span>
     </a>
-    <button class="minimal-nav__btn" id="kinetic-menu-open" aria-label="Abrir menú">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+    <a href="https://github.com/mtcarlos/TFG" target="_blank" rel="noopener noreferrer" class="minimal-nav__github"
+      aria-label="Repositorio en GitHub">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="3" y1="12" x2="21" y2="12"></line>
-        <line x1="3" y1="6" x2="21" y2="6"></line>
-        <line x1="3" y1="18" x2="21" y2="18"></line>
+        <path
+          d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+        <path d="M9 18c-4.51 2-5-2-7-2" />
       </svg>
-    </button>
+    </a>
   </header>
 
-  <!-- ======== KINETIC MENU OVERLAY ======== -->
-  <div class="kinetic-menu" id="kinetic-menu">
-    <div class="kinetic-menu__bg"></div>
-    <button class="kinetic-menu__close" id="kinetic-menu-close" aria-label="Cerrar menú">
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
+  <!-- ======== SECTION DOTS NAVIGATION ======== -->
+  <nav class="section-dots" id="section-dots" aria-label="Navegación por secciones">
+    <!-- Inicio -->
+    <a href="#hero" class="section-dot" data-section="hero" aria-label="Inicio">
+      <span class="section-dot__tooltip">Inicio</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
       </svg>
-    </button>
-    <div class="kinetic-menu__wrapper" id="kinetic-menu-wrapper">
-      <div class="kinetic-menu__inner" id="kinetic-menu-inner">
-        <!-- Elementos duplicados para el efecto de ruleta infinita (opcional, pero con GSAP lo haremos con drag/scroll) -->
-        <a href="#videos" class="kinetic-menu__item">
-          <span class="kinetic-menu__num">01.</span>
-          <span class="kinetic-menu__text" data-text="DEMOS">DEMOS</span>
-        </a>
-        <a href="#memoria" class="kinetic-menu__item">
-          <span class="kinetic-menu__num">02.</span>
-          <span class="kinetic-menu__text" data-text="MEMORIA">MEMORIA</span>
-        </a>
-        <a href="#features" class="kinetic-menu__item">
-          <span class="kinetic-menu__num">03.</span>
-          <span class="kinetic-menu__text" data-text="CARACTERÍSTICAS">CARACTERÍSTICAS</span>
-        </a>
-        <a href="#techstack" class="kinetic-menu__item">
-          <span class="kinetic-menu__num">04.</span>
-          <span class="kinetic-menu__text" data-text="TECH STACK">TECH STACK</span>
-        </a>
-        <a href="#setup" class="kinetic-menu__item">
-          <span class="kinetic-menu__num">05.</span>
-          <span class="kinetic-menu__text" data-text="INSTALACIÓN">INSTALACIÓN</span>
-        </a>
-        <a href="galeria.html" class="kinetic-menu__item">
-          <span class="kinetic-menu__num">06.</span>
-          <span class="kinetic-menu__text" data-text="GALERÍA">GALERÍA</span>
-        </a>
-        <a href="https://github.com/mtcarlos/TFG" target="_blank" class="kinetic-menu__item">
-          <span class="kinetic-menu__num">07.</span>
-          <span class="kinetic-menu__text" data-text="GITHUB">GITHUB</span>
-        </a>
-      </div>
-    </div>
-  </div>
+    </a>
+    <!-- Demos -->
+    <a href="#videos" class="section-dot" data-section="videos" aria-label="Demos">
+      <span class="section-dot__tooltip">Demos</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="5 3 19 12 5 21 5 3" />
+      </svg>
+    </a>
+    <!-- Memoria -->
+    <a href="#memoria" class="section-dot" data-section="memoria" aria-label="Memoria">
+      <span class="section-dot__tooltip">Memoria</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+      </svg>
+    </a>
+    <!-- Características -->
+    <a href="#features" class="section-dot" data-section="features" aria-label="Características">
+      <span class="section-dot__tooltip">Características</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="4" width="16" height="16" rx="2" />
+        <rect x="9" y="9" width="6" height="6" />
+        <line x1="9" y1="1" x2="9" y2="4" />
+        <line x1="15" y1="1" x2="15" y2="4" />
+        <line x1="9" y1="20" x2="9" y2="23" />
+        <line x1="15" y1="20" x2="15" y2="23" />
+        <line x1="20" y1="9" x2="23" y2="9" />
+        <line x1="20" y1="14" x2="23" y2="14" />
+        <line x1="1" y1="9" x2="4" y2="9" />
+        <line x1="1" y1="14" x2="4" y2="14" />
+      </svg>
+    </a>
+    <!-- Tecnologías -->
+    <a href="#techstack" class="section-dot" data-section="techstack" aria-label="Tecnologías">
+      <span class="section-dot__tooltip">Tecnologías</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <ellipse cx="12" cy="6" rx="8" ry="3" />
+        <path d="M4 6v6a8 3 0 0 0 16 0V6" />
+        <path d="M4 12v6a8 3 0 0 0 16 0v-6" />
+      </svg>
+    </a>
+    <!-- Instalación -->
+    <a href="#setup" class="section-dot" data-section="setup" aria-label="Instalación">
+      <span class="section-dot__tooltip">Instalación</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="4 17 10 11 4 5" />
+        <line x1="12" y1="19" x2="20" y2="19" />
+      </svg>
+    </a>
+    <!-- Galería (enlace externo a otra página) -->
+    <a href="galeria.html" class="section-dot" data-section="galeria" aria-label="Galería">
+      <span class="section-dot__tooltip">Galería</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7" />
+        <rect x="14" y="3" width="7" height="7" />
+        <rect x="14" y="14" width="7" height="7" />
+        <rect x="3" y="14" width="7" height="7" />
+      </svg>
+    </a>
+  </nav>
 
 
   <!-- ======== 1. HERO SECTION ======== -->
@@ -258,7 +291,7 @@
               <rect x="17" y="8" width="6" height="12" rx="0" />
             </svg>
           </div>
-          <h3 class="feature-card__title">Spatial Repository Mapping</h3>
+          <h3 class="feature-card__title">Mapeo Espacial de Repositorios</h3>
           <p class="feature-card__text">Conversión dinámica de repositorios de GitHub en ciudades 3D interactivas. Los
             directorios se transforman en distritos y los archivos en edificios cuya altura representa las líneas de
             código.</p>
@@ -282,14 +315,14 @@
               <line x1="18" y1="12" x2="22" y2="12" />
             </svg>
           </div>
-          <h3 class="feature-card__title">The Oracle — IA Contextual</h3>
+          <h3 class="feature-card__title">El Oráculo — IA Contextual</h3>
           <p class="feature-card__text">Asistente de inteligencia artificial integrado en el entorno VR. Utiliza RAG
             guiado por la mirada del usuario para ofrecer análisis contextual en tiempo real a través de la API de
             Google Gemini mediante un microservicio en Python.
           </p>
           <div class="feature-card__list">
             <span class="feature-card__list-item">RAG basado en la dirección de mirada</span>
-            <span class="feature-card__list-item">Explicación de código y sugerencia de refactoring</span>
+            <span class="feature-card__list-item">Explicación de código y sugerencias de refactorización</span>
             <span class="feature-card__list-item">Detección de bugs y dependencias</span>
           </div>
         </div>
@@ -310,7 +343,7 @@
             manos, y chat de voz P2P. Colabora con tu equipo como si recorrieran la misma ciudad física.</p>
           <div class="feature-card__list">
             <span class="feature-card__list-item">WebRTC con Networked-Aframe</span>
-            <span class="feature-card__list-item">Avatares con head/hand tracking</span>
+            <span class="feature-card__list-item">Avatares con seguimiento de cabeza y manos</span>
             <span class="feature-card__list-item">Chat de voz peer-to-peer</span>
           </div>
         </div>
@@ -325,7 +358,7 @@
     <div class="page-container">
       <div class="section__title reveal">
         <span class="tag tag--red">Tecnología</span>
-        <h2 class="text-heading" style="margin-top: var(--spacing-16);">Arquitectura y Tech Stack</h2>
+        <h2 class="text-heading" style="margin-top: var(--spacing-16);">Arquitectura y Tecnologías</h2>
       </div>
       <div class="reveal">
         <div class="tech-architecture">
@@ -342,7 +375,7 @@
           <div class="tech-connector">↓</div>
 
           <div class="tech-layer">
-            <h3 class="tech-layer__title">02. BACKEND / MULTIPLAYER</h3>
+            <h3 class="tech-layer__title">02. BACKEND / MULTIJUGADOR</h3>
             <div class="tech-layer__blocks">
               <div class="tech-block">Node.js</div>
               <div class="tech-block">Express</div>
@@ -355,7 +388,7 @@
           <div class="tech-connector">↓</div>
 
           <div class="tech-layer">
-            <h3 class="tech-layer__title">03. INTELLIGENCE (The Oracle)</h3>
+            <h3 class="tech-layer__title">03. INTELIGENCIA (El Oráculo)</h3>
             <div class="tech-layer__blocks">
               <div class="tech-block">Google Gemini API</div>
               <div class="tech-block">Python Microservice</div>
@@ -477,7 +510,7 @@
                     <span class="control-key">Ratón</span>
                     <span class="control-desc">Mirar alrededor</span>
                     <span class="control-key">O</span>
-                    <span class="control-desc">Activar / Desactivar The Oracle</span>
+                    <span class="control-desc">Activar / Desactivar El Oráculo</span>
                     <span class="control-key">ESC</span>
                     <span class="control-desc">Pausa / Desenfocar</span>
                   </div>
@@ -498,11 +531,11 @@
                     <span class="control-key">Joy R</span>
                     <span class="control-desc">Giro de cámara (Snap Turn)</span>
                     <span class="control-key">Gatillo R</span>
-                    <span class="control-desc">Interactuar (láser + clic en edificios u Oracle)</span>
+                    <span class="control-desc">Interactuar (láser + clic en edificios u Oráculo)</span>
                     <span class="control-key">X / Y</span>
-                    <span class="control-desc">Activar The Oracle (controlador izquierdo)</span>
+                    <span class="control-desc">Activar El Oráculo (controlador izquierdo)</span>
                     <span class="control-key">A / B</span>
-                    <span class="control-desc">Activar The Oracle (controlador derecho)</span>
+                    <span class="control-desc">Activar El Oráculo (controlador derecho)</span>
                   </div>
                 </div>
               </div>
@@ -524,7 +557,7 @@
           <img src="assets/MiLogo.png" alt="Logo" class="footer__logo">
           <div class="footer__brand-text">
             <strong>VR Code City</strong><br>
-            Immersive Code Analysis Environment<br>
+            Entorno Inmersivo de Análisis de Código<br>
             Trabajo de Fin de Grado
           </div>
         </div>
@@ -581,7 +614,7 @@
   <div class="oracle-widget" id="oracle-widget">
     <div class="oracle-widget__bubble" id="oracle-bubble">¡Bienvenido a VR Code City!</div>
     <button class="oracle-widget__avatar" id="oracle-avatar">
-      <img src="assets/MiLogo.png" alt="The Oracle" id="oracle-img">
+      <img src="assets/MiLogo.png" alt="El Oráculo" id="oracle-img">
     </button>
   </div>
 
