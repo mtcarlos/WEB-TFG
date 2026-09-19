@@ -37,7 +37,7 @@
       imageGallery.style.display = 'grid';
       videoGallery.style.display = 'none';
       if (galleryHeading) galleryHeading.textContent = 'La Ciudad en Imágenes';
-      if (galleryCount) galleryCount.textContent = '08 capturas';
+      if (galleryCount) galleryCount.textContent = '07 capturas';
     });
 
     btnShowVideos.addEventListener('click', function() {
@@ -46,7 +46,7 @@
       videoGallery.style.display = 'grid';
       imageGallery.style.display = 'none';
       if (galleryHeading) galleryHeading.textContent = 'La Ciudad en Vídeos';
-      if (galleryCount) galleryCount.textContent = '03 vídeos';
+      if (galleryCount) galleryCount.textContent = '04 vídeos';
     });
   }
 
@@ -57,9 +57,8 @@
     '¡Mira cómo se ven los distritos! Cada carpeta es un barrio.',
     'The Oracle analiza el código que estás mirando en tiempo real.',
     'Sesión multijugador: ¡mis amigos también recorren la ciudad!',
-    'El panel de control permite cargar cualquier repositorio de GitHub.',
-    'Vista aérea de la metrópolis digital. ¡Impresionante, ¿eh?!',
-    'Los edificios más altos tienen más líneas de código. ¡Cuidado con los rascacielos!'
+    'Los edificios más altos tienen más líneas de código. ¡Cuidado con los rascacielos!',
+    'Vista aérea de la metrópolis digital. ¡Impresionante, ¿eh?!'
   ];
 
   // ---- LIGHTBOX LOGIC ----
