@@ -1493,3 +1493,24 @@ h6 {
     height: 20px;
   }
 }
+
+
+/* ---- FAQ SECTION ---- */
+.faq__container {
+  max-width: 860px;
+}
+
+.faq__container .accordion__header span:first-child {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-semibold);
+}
+
+.faq__container .accordion__content p {
+  color: var(--color-charcoal-ink);
+  opacity: 0.85;
+}
+
+.faq__container .accordion__content strong {
+  opacity: 1;
+  color: var(--color-charcoal-ink);
+}

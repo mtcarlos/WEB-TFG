@@ -107,6 +107,16 @@
         <line x1="12" y1="19" x2="20" y2="19" />
       </svg>
     </a>
+    <!-- FAQ -->
+    <a href="#faq" class="section-dot" data-section="faq" aria-label="Preguntas Frecuentes">
+      <span class="section-dot__tooltip">FAQ</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+        <line x1="12" y1="17" x2="12.01" y2="17" />
+      </svg>
+    </a>
     <!-- Galería (enlace externo a otra página) -->
     <a href="galeria.html" class="section-dot" data-section="galeria" aria-label="Galería">
       <span class="section-dot__tooltip">Galería</span>
@@ -549,7 +559,96 @@
   </section>
 
 
-  <!-- ======== 7. FOOTER ======== -->
+  <!-- ======== 7. PREGUNTAS FRECUENTES ======== -->
+  <section class="section section--white" id="faq">
+    <div class="page-container">
+      <div class="section__title reveal">
+        <span class="tag tag--red">FAQ</span>
+        <h2 class="text-heading" style="margin-top: var(--spacing-16);">Preguntas Frecuentes</h2>
+      </div>
+
+      <div class="faq__container reveal">
+        <div class="accordion" id="accordion-faq">
+
+          <div class="accordion__item">
+            <button class="accordion__header" aria-expanded="false">
+              <span>¿Por qué Realidad Virtual y no un dashboard 2D tradicional?</span>
+              <span class="accordion__icon">+</span>
+            </button>
+            <div class="accordion__body">
+              <div class="accordion__content">
+                <p class="text-body-sm">La Realidad Virtual ofrece tres ventajas clave frente a un dashboard 2D: (1) <strong>percepción espacial natural</strong> — el cerebro humano procesa relaciones tridimensionales de forma innata, lo que permite comprender la estructura de un repositorio complejo de un vistazo; (2) <strong>escala inmersiva</strong> — un edificio de 500 líneas de código literalmente <em>se siente</em> más grande que uno de 50, creando una intuición visceral sobre la complejidad del código; y (3) <strong>colaboración presencial virtual</strong> — múltiples desarrolladores pueden recorrer la ciudad simultáneamente, señalar zonas problemáticas y discutirlas como si estuvieran físicamente juntos.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__header" aria-expanded="false">
+              <span>¿Cómo se diferencia de Code City clásico (Wettel & Lanza)?</span>
+              <span class="accordion__icon">+</span>
+            </button>
+            <div class="accordion__body">
+              <div class="accordion__content">
+                <p class="text-body-sm">Code City de Wettel & Lanza (2007) fue la investigación pionera en visualización de código como ciudades, pero se ejecutaba como aplicación de escritorio offline y monousuario. VR Code City se diferencia en tres ejes: (1) funciona enteramente en el <strong>navegador web</strong> mediante WebXR, sin instalación; (2) incorpora <strong>sesiones multijugador en tiempo real</strong> con WebRTC para code reviews colaborativas; y (3) integra un <strong>agente de IA contextual</strong> (The Oracle) que analiza el código que el usuario observa, algo inexistente en la propuesta original.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__header" aria-expanded="false">
+              <span>¿Es escalable a repositorios de gran tamaño?</span>
+              <span class="accordion__icon">+</span>
+            </button>
+            <div class="accordion__body">
+              <div class="accordion__content">
+                <p class="text-body-sm">Actualmente, la plataforma maneja repositorios de tamaño medio (cientos de archivos) con fluidez a ~60 FPS. Para repositorios monolíticos de gran escala (miles de archivos), se contemplan optimizaciones como <strong>Level of Detail (LOD)</strong> — reducir la geometría de edificios lejanos —, <strong>carga progresiva por distritos</strong> (solo renderizar el barrio visible) e <strong>instanced rendering</strong> para minimizar draw calls. Estas optimizaciones están documentadas como trabajo futuro en la memoria del TFG.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__header" aria-expanded="false">
+              <span>¿Qué navegadores y dispositivos son compatibles?</span>
+              <span class="accordion__icon">+</span>
+            </button>
+            <div class="accordion__body">
+              <div class="accordion__content">
+                <p class="text-body-sm">La plataforma funciona en dos modos: <strong>Modo Escritorio</strong> — cualquier navegador Chromium moderno (Chrome, Edge, Brave) con teclado y ratón; y <strong>Modo VR Inmersivo</strong> — cascos compatibles con WebXR como Meta Quest 2/3/Pro a través del navegador Meta Quest Browser. Firefox tiene soporte parcial de WebXR. Safari no soporta WebXR nativamente. Para el modo VR se requiere conexión HTTPS (mediante un túnel como NGROK o certificado SSL local).</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__header" aria-expanded="false">
+              <span>¿Cómo funciona The Oracle dentro del entorno VR?</span>
+              <span class="accordion__icon">+</span>
+            </button>
+            <div class="accordion__body">
+              <div class="accordion__content">
+                <p class="text-body-sm">The Oracle es un agente de IA que utiliza <strong>RAG (Retrieval-Augmented Generation)</strong> guiado por la mirada del usuario. Cuando el usuario mira un edificio (archivo) y activa el Oráculo, el sistema: (1) identifica el archivo observado mediante raycasting; (2) extrae su contenido del repositorio clonado; (3) envía el código como contexto a la API de Google Gemini junto con el historial de la conversación; y (4) presenta la respuesta en un panel flotante dentro del entorno VR. Esto permite preguntar "¿qué hace esta función?" o "¿cómo refactorizo esto?" mientras se recorre la ciudad.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__header" aria-expanded="false">
+              <span>¿Qué ventajas tiene el modo multijugador para code reviews?</span>
+              <span class="accordion__icon">+</span>
+            </button>
+            <div class="accordion__body">
+              <div class="accordion__content">
+                <p class="text-body-sm">El modo multijugador transforma las code reviews de un proceso asíncrono (comentarios en PRs) a una <strong>experiencia sincrónica y espacial</strong>. Los revisores pueden: ver los avatares de sus compañeros moverse por la ciudad en tiempo real; señalar edificios problemáticos con el láser del controlador VR; comunicarse por chat de voz P2P integrado; y compartir la perspectiva del Oráculo para discutir sugerencias de IA en grupo. La presencia compartida genera una sensación de "estar ahí juntos" que los comentarios de texto no logran.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======== 8. FOOTER ======== -->
   <footer class="footer" id="footer">
     <div class="page-container">
       <div class="footer__inner">
@@ -582,7 +681,7 @@
               <circle cx="4" cy="4" r="2" />
             </svg>
           </a>
-          <a href="#" class="footer__link">Licencia</a>
+
         </div>
       </div>
       <div class="footer__bottom">

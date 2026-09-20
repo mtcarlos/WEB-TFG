@@ -505,7 +505,8 @@
         { id: '#memoria', text: 'Toda la teoría detrás de mi cerebro.' },
         { id: '#features', text: '¡Tengo visión espacial y multijugador!' },
         { id: '#techstack', text: 'Node, A-Frame, WebRTC... Puro combustible.' },
-        { id: '#setup', text: 'Clona, instala y conéctate. ¡Fácil!' }
+        { id: '#setup', text: 'Clona, instala y conéctate. ¡Fácil!' },
+        { id: '#faq', text: '¿Tienes preguntas? ¡Yo tengo respuestas!' }
       ];
 
       sections.forEach(sec => {
