@@ -18,6 +18,37 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ---- PREMIUM POLISH ---- */
+::selection {
+  background-color: var(--color-signal-red);
+  color: var(--color-paper-white);
+}
+
+/* Scrollbar Neobrutalista */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-paper-white);
+  border-left: 2px solid var(--color-charcoal-ink);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-charcoal-ink);
+  border: 2px solid var(--color-paper-white);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-signal-red);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--color-paper-white);
+}
+
 /* ---- DESIGN TOKENS ---- */
 :root {
   /* Colors */
@@ -676,10 +707,10 @@ h6 {
   opacity: 0;
   transform: translateY(30px);
   transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1),
-              opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1),
-              box-shadow 0.2s ease,
-              background-color 0.2s ease,
-              color 0.2s ease;
+    opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
   pointer-events: none;
   cursor: pointer;
 }
@@ -702,14 +733,37 @@ h6 {
   pointer-events: auto;
 }
 
-.nav-carousel__item:nth-child(1) { transition-delay: 0.05s; }
-.nav-carousel__item:nth-child(2) { transition-delay: 0.10s; }
-.nav-carousel__item:nth-child(3) { transition-delay: 0.15s; }
-.nav-carousel__item:nth-child(4) { transition-delay: 0.20s; }
-.nav-carousel__item:nth-child(5) { transition-delay: 0.25s; }
-.nav-carousel__item:nth-child(6) { transition-delay: 0.30s; }
-.nav-carousel__item:nth-child(7) { transition-delay: 0.35s; }
-.nav-carousel__item:nth-child(8) { transition-delay: 0.40s; }
+.nav-carousel__item:nth-child(1) {
+  transition-delay: 0.05s;
+}
+
+.nav-carousel__item:nth-child(2) {
+  transition-delay: 0.10s;
+}
+
+.nav-carousel__item:nth-child(3) {
+  transition-delay: 0.15s;
+}
+
+.nav-carousel__item:nth-child(4) {
+  transition-delay: 0.20s;
+}
+
+.nav-carousel__item:nth-child(5) {
+  transition-delay: 0.25s;
+}
+
+.nav-carousel__item:nth-child(6) {
+  transition-delay: 0.30s;
+}
+
+.nav-carousel__item:nth-child(7) {
+  transition-delay: 0.35s;
+}
+
+.nav-carousel__item:nth-child(8) {
+  transition-delay: 0.40s;
+}
 
 /* Item hover */
 .nav-carousel__item:hover {
