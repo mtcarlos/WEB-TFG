@@ -13,61 +13,151 @@
   const videoModalClose = document.getElementById('video-modal-close');
   const videoModalContent = document.getElementById('video-modal-content');
 
-  // ---- SECTION DOTS NAVIGATION ----
-  const sectionDots = document.querySelectorAll('.section-dot[data-section]');
+  // ---- RADIAL CAROUSEL NAVIGATION ----
+  const navCarousel = document.getElementById('nav-carousel');
+  const navFab = document.getElementById('nav-carousel-fab');
+  const navOverlay = document.getElementById('nav-carousel-overlay');
+  const navItems = document.querySelectorAll('.nav-carousel__item[data-section]');
 
-  if (sectionDots.length) {
-    // Collect section IDs that exist on this page (exclude external links like galeria)
+  if (navCarousel && navFab && navItems.length) {
+    let isOpen = false;
+
+    // Radial positioning parameters
+    const RADIUS_DESKTOP = 210;
+    const RADIUS_MOBILE = 150;
+    // Arc opening from ~200° to ~80° (120° total) 
+    // Slightly past left and slightly past vertical for a wider, more elegant fan
+    const START_ANGLE = (200 / 180) * Math.PI;  // 200° — slightly below-left
+    const END_ANGLE = (80 / 180) * Math.PI;     // 80° — slightly past vertical
+    const TOTAL_ARC = START_ANGLE - END_ANGLE;   // 120° = 2π/3 radians
+
+    function getRadius() {
+      return window.innerWidth <= 768 ? RADIUS_MOBILE : RADIUS_DESKTOP;
+    }
+
+    function positionItems(open) {
+      const radius = getRadius();
+      const itemCount = navItems.length;
+      // FAB center offset (items are positioned relative to nav-carousel which has FAB at bottom-right)
+      // FAB size / 2 to center the arc on the FAB
+      const fabSize = window.innerWidth <= 768 ? 50 : 58;
+      const itemSize = window.innerWidth <= 768 ? 42 : 48;
+      const fabCenterX = fabSize / 2;
+      const fabCenterY = fabSize / 2;
+
+      navItems.forEach((item, index) => {
+        if (open) {
+          // Distribute items evenly across the arc (from 180° down to 90°)
+          const angle = START_ANGLE - (TOTAL_ARC / (itemCount - 1)) * index;
+          const x = Math.cos(angle) * radius; // negative (pointing left) to 0 (pointing up)
+          const y = Math.sin(angle) * radius;  // 0 (pointing left) to positive (pointing up)
+
+          // CSS 'right' increases leftward, CSS 'bottom' increases upward
+          // -x is positive (since cos is negative for our angles) → items go left ✓
+          // +y is positive (since sin is positive for our angles) → items go up ✓
+          const offsetRight = -x + (fabSize - itemSize) / 2;
+          const offsetBottom = y + (fabSize - itemSize) / 2;
+
+          item.style.right = offsetRight + 'px';
+          item.style.bottom = offsetBottom + 'px';
+          item.style.transitionDelay = (index * 0.04) + 's';
+        } else {
+          // Collapse back to FAB center
+          item.style.right = ((fabSize - itemSize) / 2) + 'px';
+          item.style.bottom = ((fabSize - itemSize) / 2) + 'px';
+          item.style.transitionDelay = ((navItems.length - 1 - index) * 0.025) + 's';
+        }
+      });
+    }
+
+    function toggleCarousel() {
+      isOpen = !isOpen;
+      navCarousel.classList.toggle('is-open', isOpen);
+      navOverlay.classList.toggle('is-open', isOpen);
+      navFab.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      navFab.setAttribute('aria-label', isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+      positionItems(isOpen);
+    }
+
+    function closeCarousel() {
+      if (isOpen) {
+        isOpen = false;
+        navCarousel.classList.remove('is-open');
+        navOverlay.classList.remove('is-open');
+        navFab.setAttribute('aria-expanded', 'false');
+        navFab.setAttribute('aria-label', 'Abrir menú de navegación');
+        positionItems(false);
+      }
+    }
+
+    // Initialize positions (collapsed)
+    positionItems(false);
+
+    // FAB click
+    navFab.addEventListener('click', toggleCarousel);
+
+    // Overlay click closes
+    navOverlay.addEventListener('click', closeCarousel);
+
+    // Escape key closes
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeCarousel();
+    });
+
+    // Recalculate positions on resize
+    window.addEventListener('resize', function () {
+      if (isOpen) positionItems(true);
+    });
+
+    // ---- Section detection (IntersectionObserver) ----
     const sectionIds = [];
-    sectionDots.forEach(dot => {
-      const id = dot.dataset.section;
+    navItems.forEach(item => {
+      const id = item.dataset.section;
       if (document.getElementById(id)) {
         sectionIds.push(id);
       }
     });
 
-    // IntersectionObserver to detect which section is in view
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.3
-    };
-
-    const setActiveDot = (sectionId) => {
-      sectionDots.forEach(dot => {
-        dot.classList.toggle('is-active', dot.dataset.section === sectionId);
+    const setActiveItem = (sectionId) => {
+      navItems.forEach(item => {
+        item.classList.toggle('is-active', item.dataset.section === sectionId);
       });
     };
 
     const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          setActiveDot(entry.target.id);
+          setActiveItem(entry.target.id);
         }
       });
-    }, observerOptions);
+    }, {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.3
+    });
 
     sectionIds.forEach(id => {
       const section = document.getElementById(id);
       if (section) sectionObserver.observe(section);
     });
 
-    // Click handler — smooth scroll for on-page sections
-    sectionDots.forEach(dot => {
-      dot.addEventListener('click', (e) => {
-        const sectionId = dot.dataset.section;
+    // Click handler — smooth scroll + close carousel
+    navItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        const sectionId = item.dataset.section;
         const target = document.getElementById(sectionId);
         if (target) {
           e.preventDefault();
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-        // If no target (e.g. galeria.html), let the default link behavior work
+        // Close carousel after navigation
+        closeCarousel();
       });
     });
 
     // Set initial active state
     if (sectionIds.length) {
-      setActiveDot(sectionIds[0]);
+      setActiveItem(sectionIds[0]);
     }
   }
 

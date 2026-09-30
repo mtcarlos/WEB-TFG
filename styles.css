@@ -111,9 +111,10 @@ html {
 .oracle-widget {
   position: fixed;
   bottom: 30px;
-  right: 30px;
+  left: 30px;
   z-index: 240;
   display: flex;
+  flex-direction: row-reverse;
   align-items: center;
   gap: 15px;
   pointer-events: none;
@@ -131,7 +132,7 @@ html {
   box-shadow: 6px 6px 0px var(--color-charcoal-ink);
   max-width: 250px;
   opacity: 0;
-  transform: translateX(20px) scale(0.9);
+  transform: translateX(-20px) scale(0.9);
   transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   pointer-events: auto;
 }
@@ -147,7 +148,7 @@ html {
   border-radius: 50%;
   background: var(--color-charcoal-ink);
   border: 3px solid var(--color-paper-white);
-  box-shadow: 4px 4px 0px var(--color-charcoal-ink);
+  box-shadow: -4px 4px 0px var(--color-charcoal-ink);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -158,12 +159,12 @@ html {
 }
 
 .oracle-widget__avatar:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px var(--color-charcoal-ink);
+  transform: translate(2px, -2px);
+  box-shadow: -6px 6px 0px var(--color-charcoal-ink);
 }
 
 .oracle-widget__avatar:active {
-  transform: translate(4px, 4px);
+  transform: translate(-4px, 4px);
   box-shadow: 0px 0px 0px var(--color-charcoal-ink);
 }
 
@@ -529,127 +530,247 @@ h6 {
   opacity: 1;
 }
 
-/* ---- SECTION DOTS NAVIGATION ---- */
-.section-dots {
+/* ---- RADIAL CAROUSEL NAVIGATION ---- */
+
+/* Overlay */
+.nav-carousel-overlay {
   position: fixed;
-  right: var(--spacing-25);
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 100;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  mix-blend-mode: difference;
+  inset: 0;
+  z-index: 199;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.nav-carousel-overlay.is-open {
+  opacity: 1;
   pointer-events: auto;
 }
 
-.section-dot {
+/* Container */
+.nav-carousel {
+  position: fixed;
+  bottom: 80px;
+  right: 60px;
+  z-index: 200;
+  pointer-events: none;
+}
+
+/* FAB Button — Neobrutalista */
+.nav-carousel__fab {
   position: relative;
+  z-index: 210;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 58px;
+  height: 58px;
+  background: var(--color-paper-white);
+  border: 3px solid var(--color-charcoal-ink);
+  border-radius: 0;
+  box-shadow: 5px 5px 0px var(--color-charcoal-ink);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.25s cubic-bezier(0.19, 1, 0.22, 1),
+    box-shadow 0.25s cubic-bezier(0.19, 1, 0.22, 1),
+    background-color 0.25s ease;
+}
+
+.nav-carousel__fab:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0px var(--color-charcoal-ink);
+}
+
+.nav-carousel__fab:active {
+  transform: translate(5px, 5px);
+  box-shadow: 0px 0px 0px var(--color-charcoal-ink);
+}
+
+/* Hamburger lines */
+.nav-carousel__fab-line {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background: var(--color-charcoal-ink);
+  border-radius: 0;
+  transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 0.25s ease,
+    width 0.25s ease;
+  transform-origin: center;
+}
+
+/* Hamburger → × morphing */
+.nav-carousel.is-open .nav-carousel__fab-line:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.nav-carousel.is-open .nav-carousel__fab-line:nth-child(2) {
+  opacity: 0;
+  width: 0;
+}
+
+.nav-carousel.is-open .nav-carousel__fab-line:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.nav-carousel.is-open .nav-carousel__fab {
+  background: var(--color-charcoal-ink);
+  box-shadow: 5px 5px 0px var(--color-signal-red);
+}
+
+.nav-carousel.is-open .nav-carousel__fab-line {
+  background: var(--color-paper-white);
+}
+
+.nav-carousel.is-open .nav-carousel__fab:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0px var(--color-signal-red);
+}
+
+.nav-carousel.is-open .nav-carousel__fab:active {
+  transform: translate(5px, 5px);
+  box-shadow: 0px 0px 0px var(--color-signal-red);
+}
+
+/* Nav items — radial position calculated via JS, placed hidden by default */
+.nav-carousel__item {
+  position: absolute;
+  bottom: 0;
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  background: var(--color-paper-white);
+  border: 3px solid var(--color-charcoal-ink);
+  border-radius: 0;
+  box-shadow: 3px 3px 0px var(--color-charcoal-ink);
+  color: var(--color-charcoal-ink);
   text-decoration: none;
-  color: var(--color-paper-white);
-  opacity: 0.35;
-  transition: opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1),
-    transform 0.4s cubic-bezier(0.19, 1, 0.22, 1),
-    background-color 0.4s ease;
+  opacity: 0;
+  transform: scale(0.3);
+  pointer-events: none;
+  transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 0.35s cubic-bezier(0.19, 1, 0.22, 1),
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
   cursor: pointer;
 }
 
-.section-dot svg {
-  width: 18px;
-  height: 18px;
-  transition: filter 0.4s ease;
+.nav-carousel__item svg {
+  width: 20px;
+  height: 20px;
+  transition: filter 0.3s ease;
 }
 
-.section-dot:hover {
-  opacity: 0.8;
-  transform: scale(1.15);
-}
-
-.section-dot.is-active {
+/* Items visible when carousel is open */
+.nav-carousel.is-open .nav-carousel__item {
   opacity: 1;
-  transform: scale(1.2);
+  transform: scale(1);
+  pointer-events: auto;
 }
 
-.section-dot.is-active svg {
-  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
+/* Item hover */
+.nav-carousel__item:hover {
+  transform: scale(1.15) !important;
+  box-shadow: 5px 5px 0px var(--color-charcoal-ink);
+  z-index: 5;
 }
 
-/* Tooltip — appears on hover */
-.section-dot__tooltip {
+/* Active section — Signal Red accent */
+.nav-carousel__item.is-active {
+  background: var(--color-signal-red);
+  color: var(--color-paper-white);
+  border-color: var(--color-charcoal-ink);
+  box-shadow: 4px 4px 0px var(--color-charcoal-ink);
+}
+
+.nav-carousel__item.is-active svg {
+  stroke: var(--color-paper-white);
+}
+
+/* Tooltip */
+.nav-carousel__tooltip {
   position: absolute;
-  right: calc(100% + 12px);
+  right: calc(100% + 14px);
   top: 50%;
-  transform: translateY(-50%) translateX(6px);
+  transform: translateY(-50%) translateX(8px);
   white-space: nowrap;
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: var(--font-weight-semibold);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
-  color: var(--color-paper-white);
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 5px 10px;
-  border-radius: 4px;
+  color: var(--color-charcoal-ink);
+  background: var(--color-paper-white);
+  border: 2px solid var(--color-charcoal-ink);
+  box-shadow: 3px 3px 0px var(--color-charcoal-ink);
+  padding: 5px 12px;
+  border-radius: 0;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-  /* Disable mix-blend-mode on tooltip so it stays readable */
-  mix-blend-mode: normal;
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.section-dot:hover .section-dot__tooltip {
+.nav-carousel__item:hover .nav-carousel__tooltip {
   opacity: 1;
   transform: translateY(-50%) translateX(0);
 }
 
-/* ---- SECTION DOTS — MOBILE (horizontal bottom bar) ---- */
+/* ---- RADIAL CAROUSEL — MOBILE ---- */
 @media (max-width: 768px) {
-  .section-dots {
-    top: auto;
-    right: auto;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    flex-direction: row;
+  .nav-carousel {
+    bottom: 50px;
+    right: 40px;
+  }
+
+  .nav-carousel__fab {
+    width: 50px;
+    height: 50px;
     gap: 4px;
-    background: rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    padding: 6px 10px;
-    border-radius: var(--radius-full);
-    mix-blend-mode: normal;
   }
 
-  .section-dot {
-    width: 34px;
-    height: 34px;
-    color: rgba(255, 255, 255, 0.9);
+  .nav-carousel__fab-line {
+    width: 20px;
+    height: 2.5px;
   }
 
-  .section-dot svg {
-    width: 15px;
-    height: 15px;
+  .nav-carousel.is-open .nav-carousel__fab-line:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
   }
 
-  .section-dot__tooltip {
-    /* Tooltip moves above on mobile */
+  .nav-carousel.is-open .nav-carousel__fab-line:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  .nav-carousel__item {
+    width: 42px;
+    height: 42px;
+  }
+
+  .nav-carousel__item svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .nav-carousel__tooltip {
+    /* Tooltip on top for mobile */
     right: auto;
     left: 50%;
     top: auto;
     bottom: calc(100% + 10px);
     transform: translateX(-50%) translateY(4px);
+    font-size: 10px;
   }
 
-  .section-dot:hover .section-dot__tooltip {
+  .nav-carousel__item:hover .nav-carousel__tooltip {
     transform: translateX(-50%) translateY(0);
   }
 }
