@@ -43,85 +43,86 @@
     </a>
   </header>
 
-  <!-- ======== RADIAL CAROUSEL NAVIGATION ======== -->
+  <!-- ======== CENTERED MENU NAVIGATION ======== -->
   <div class="nav-carousel-overlay" id="nav-carousel-overlay"></div>
   <nav class="nav-carousel" id="nav-carousel" aria-label="Navegación por secciones">
-    <!-- Radial icon items -->
-    <a href="#hero" class="nav-carousel__item" data-section="hero" aria-label="Inicio">
-      <span class="nav-carousel__tooltip">Inicio</span>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-        stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-        <polyline points="9 22 9 12 15 12 15 22" />
-      </svg>
-    </a>
-    <a href="#videos" class="nav-carousel__item" data-section="videos" aria-label="Demos">
-      <span class="nav-carousel__tooltip">Demos</span>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-        stroke-linecap="round" stroke-linejoin="round">
-        <polygon points="5 3 19 12 5 21 5 3" />
-      </svg>
-    </a>
-    <a href="#memoria" class="nav-carousel__item" data-section="memoria" aria-label="Memoria">
-      <span class="nav-carousel__tooltip">Memoria</span>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-        stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-      </svg>
-    </a>
-    <a href="#features" class="nav-carousel__item" data-section="features" aria-label="Características">
-      <span class="nav-carousel__tooltip">Características</span>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-        stroke-linecap="round" stroke-linejoin="round">
-        <rect x="4" y="4" width="16" height="16" rx="2" />
-        <rect x="9" y="9" width="6" height="6" />
-        <line x1="9" y1="1" x2="9" y2="4" />
-        <line x1="15" y1="1" x2="15" y2="4" />
-        <line x1="9" y1="20" x2="9" y2="23" />
-        <line x1="15" y1="20" x2="15" y2="23" />
-        <line x1="20" y1="9" x2="23" y2="9" />
-        <line x1="20" y1="14" x2="23" y2="14" />
-        <line x1="1" y1="9" x2="4" y2="9" />
-        <line x1="1" y1="14" x2="4" y2="14" />
-      </svg>
-    </a>
-    <a href="#techstack" class="nav-carousel__item" data-section="techstack" aria-label="Tecnologías">
-      <span class="nav-carousel__tooltip">Tecnologías</span>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-        stroke-linecap="round" stroke-linejoin="round">
-        <ellipse cx="12" cy="6" rx="8" ry="3" />
-        <path d="M4 6v6a8 3 0 0 0 16 0V6" />
-        <path d="M4 12v6a8 3 0 0 0 16 0v-6" />
-      </svg>
-    </a>
-    <a href="#setup" class="nav-carousel__item" data-section="setup" aria-label="Instalación">
-      <span class="nav-carousel__tooltip">Instalación</span>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-        stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="4 17 10 11 4 5" />
-        <line x1="12" y1="19" x2="20" y2="19" />
-      </svg>
-    </a>
-    <a href="#faq" class="nav-carousel__item" data-section="faq" aria-label="Preguntas Frecuentes">
-      <span class="nav-carousel__tooltip">FAQ</span>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-        stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-        <line x1="12" y1="17" x2="12.01" y2="17" />
-      </svg>
-    </a>
-    <a href="galeria.html" class="nav-carousel__item" data-section="galeria" aria-label="Galería">
-      <span class="nav-carousel__tooltip">Galería</span>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-        stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="3" width="7" height="7" />
-        <rect x="14" y="3" width="7" height="7" />
-        <rect x="14" y="14" width="7" height="7" />
-        <rect x="3" y="14" width="7" height="7" />
-      </svg>
-    </a>
+    <div class="nav-carousel__menu" id="nav-carousel-menu">
+      <a href="#hero" class="nav-carousel__item" data-section="hero" aria-label="Inicio">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <polyline points="9 22 9 12 15 12 15 22" />
+        </svg>
+        <span class="nav-carousel__label">Inicio</span>
+      </a>
+      <a href="#videos" class="nav-carousel__item" data-section="videos" aria-label="Demos">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="5 3 19 12 5 21 5 3" />
+        </svg>
+        <span class="nav-carousel__label">Demos</span>
+      </a>
+      <a href="#memoria" class="nav-carousel__item" data-section="memoria" aria-label="Memoria">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+        </svg>
+        <span class="nav-carousel__label">Memoria</span>
+      </a>
+      <a href="#features" class="nav-carousel__item" data-section="features" aria-label="Características">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="4" width="16" height="16" rx="2" />
+          <rect x="9" y="9" width="6" height="6" />
+          <line x1="9" y1="1" x2="9" y2="4" />
+          <line x1="15" y1="1" x2="15" y2="4" />
+          <line x1="9" y1="20" x2="9" y2="23" />
+          <line x1="15" y1="20" x2="15" y2="23" />
+          <line x1="20" y1="9" x2="23" y2="9" />
+          <line x1="20" y1="14" x2="23" y2="14" />
+          <line x1="1" y1="9" x2="4" y2="9" />
+          <line x1="1" y1="14" x2="4" y2="14" />
+        </svg>
+        <span class="nav-carousel__label">Características</span>
+      </a>
+      <a href="#techstack" class="nav-carousel__item" data-section="techstack" aria-label="Tecnologías">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="12" cy="6" rx="8" ry="3" />
+          <path d="M4 6v6a8 3 0 0 0 16 0V6" />
+          <path d="M4 12v6a8 3 0 0 0 16 0v-6" />
+        </svg>
+        <span class="nav-carousel__label">Tecnologías</span>
+      </a>
+      <a href="#setup" class="nav-carousel__item" data-section="setup" aria-label="Instalación">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="4 17 10 11 4 5" />
+          <line x1="12" y1="19" x2="20" y2="19" />
+        </svg>
+        <span class="nav-carousel__label">Instalación</span>
+      </a>
+      <a href="#faq" class="nav-carousel__item" data-section="faq" aria-label="Preguntas Frecuentes">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+          <line x1="12" y1="17" x2="12.01" y2="17" />
+        </svg>
+        <span class="nav-carousel__label">FAQ</span>
+      </a>
+      <a href="galeria.html" class="nav-carousel__item" data-section="galeria" aria-label="Galería">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" />
+          <rect x="14" y="3" width="7" height="7" />
+          <rect x="14" y="14" width="7" height="7" />
+          <rect x="3" y="14" width="7" height="7" />
+        </svg>
+        <span class="nav-carousel__label">Galería</span>
+      </a>
+    </div>
     <!-- FAB Toggle Button -->
     <button class="nav-carousel__fab" id="nav-carousel-fab" aria-label="Abrir menú de navegación" aria-expanded="false">
       <span class="nav-carousel__fab-line"></span>

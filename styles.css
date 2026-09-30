@@ -110,8 +110,8 @@ html {
 /* ---- ORACLE WIDGET ---- */
 .oracle-widget {
   position: fixed;
-  bottom: 30px;
-  left: 30px;
+  bottom: 40px;
+  left: 40px;
   z-index: 240;
   display: flex;
   flex-direction: row-reverse;
@@ -553,8 +553,8 @@ h6 {
 /* Container */
 .nav-carousel {
   position: fixed;
-  bottom: 80px;
-  right: 60px;
+  bottom: 40px;
+  right: 40px;
   z-index: 200;
   pointer-events: none;
 }
@@ -637,50 +637,84 @@ h6 {
   box-shadow: 0px 0px 0px var(--color-signal-red);
 }
 
-/* Nav items — radial position calculated via JS, placed hidden by default */
+/* CENTERED MENU WRAPPER */
+.nav-carousel__menu {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  z-index: 205;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .nav-carousel__menu {
+    grid-template-columns: 1fr;
+    width: 90%;
+    max-width: 320px;
+  }
+}
+
+/* Nav items — Neobrutalist buttons */
 .nav-carousel__item {
-  position: absolute;
-  bottom: 0;
-  right: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
+  gap: 15px;
+  padding: 15px 30px;
   background: var(--color-paper-white);
   border: 3px solid var(--color-charcoal-ink);
-  border-radius: 0;
-  box-shadow: 3px 3px 0px var(--color-charcoal-ink);
+  box-shadow: 5px 5px 0px var(--color-charcoal-ink);
   color: var(--color-charcoal-ink);
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
   text-decoration: none;
   opacity: 0;
-  transform: scale(0.3);
+  transform: translateY(30px);
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+              opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+              box-shadow 0.2s ease,
+              background-color 0.2s ease,
+              color 0.2s ease;
   pointer-events: none;
-  transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1),
-    opacity 0.35s cubic-bezier(0.19, 1, 0.22, 1),
-    box-shadow 0.2s ease,
-    background-color 0.2s ease,
-    color 0.2s ease;
   cursor: pointer;
 }
 
 .nav-carousel__item svg {
-  width: 20px;
-  height: 20px;
-  transition: filter 0.3s ease;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  transition: stroke 0.3s ease;
 }
 
-/* Items visible when carousel is open */
+.nav-carousel__label {
+  white-space: nowrap;
+}
+
+/* Staggered entry animation when open */
 .nav-carousel.is-open .nav-carousel__item {
   opacity: 1;
-  transform: scale(1);
+  transform: translateY(0);
   pointer-events: auto;
 }
 
+.nav-carousel__item:nth-child(1) { transition-delay: 0.05s; }
+.nav-carousel__item:nth-child(2) { transition-delay: 0.10s; }
+.nav-carousel__item:nth-child(3) { transition-delay: 0.15s; }
+.nav-carousel__item:nth-child(4) { transition-delay: 0.20s; }
+.nav-carousel__item:nth-child(5) { transition-delay: 0.25s; }
+.nav-carousel__item:nth-child(6) { transition-delay: 0.30s; }
+.nav-carousel__item:nth-child(7) { transition-delay: 0.35s; }
+.nav-carousel__item:nth-child(8) { transition-delay: 0.40s; }
+
 /* Item hover */
 .nav-carousel__item:hover {
-  transform: scale(1.15) !important;
-  box-shadow: 5px 5px 0px var(--color-charcoal-ink);
+  transform: translate(-4px, -4px) !important;
+  box-shadow: 9px 9px 0px var(--color-charcoal-ink);
   z-index: 5;
 }
 
@@ -689,46 +723,27 @@ h6 {
   background: var(--color-signal-red);
   color: var(--color-paper-white);
   border-color: var(--color-charcoal-ink);
-  box-shadow: 4px 4px 0px var(--color-charcoal-ink);
+  box-shadow: 5px 5px 0px var(--color-charcoal-ink);
+}
+
+.nav-carousel__item.is-active:hover {
+  box-shadow: 9px 9px 0px var(--color-charcoal-ink);
 }
 
 .nav-carousel__item.is-active svg {
   stroke: var(--color-paper-white);
 }
 
-/* Tooltip */
-.nav-carousel__tooltip {
-  position: absolute;
-  right: calc(100% + 14px);
-  top: 50%;
-  transform: translateY(-50%) translateX(8px);
-  white-space: nowrap;
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  color: var(--color-charcoal-ink);
-  background: var(--color-paper-white);
-  border: 2px solid var(--color-charcoal-ink);
-  box-shadow: 3px 3px 0px var(--color-charcoal-ink);
-  padding: 5px 12px;
-  border-radius: 0;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.nav-carousel__item:hover .nav-carousel__tooltip {
-  opacity: 1;
-  transform: translateY(-50%) translateX(0);
-}
-
-/* ---- RADIAL CAROUSEL — MOBILE ---- */
+/* ---- CAROUSEL NAV & ORACLE — MOBILE TWEAKS ---- */
 @media (max-width: 768px) {
   .nav-carousel {
-    bottom: 50px;
-    right: 40px;
+    bottom: 30px;
+    right: 30px;
+  }
+
+  .oracle-widget {
+    bottom: 30px;
+    left: 30px;
   }
 
   .nav-carousel__fab {
@@ -748,30 +763,6 @@ h6 {
 
   .nav-carousel.is-open .nav-carousel__fab-line:nth-child(3) {
     transform: translateY(-6.5px) rotate(-45deg);
-  }
-
-  .nav-carousel__item {
-    width: 42px;
-    height: 42px;
-  }
-
-  .nav-carousel__item svg {
-    width: 17px;
-    height: 17px;
-  }
-
-  .nav-carousel__tooltip {
-    /* Tooltip on top for mobile */
-    right: auto;
-    left: 50%;
-    top: auto;
-    bottom: calc(100% + 10px);
-    transform: translateX(-50%) translateY(4px);
-    font-size: 10px;
-  }
-
-  .nav-carousel__item:hover .nav-carousel__tooltip {
-    transform: translateX(-50%) translateY(0);
   }
 }
 

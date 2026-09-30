@@ -13,7 +13,7 @@
   const videoModalClose = document.getElementById('video-modal-close');
   const videoModalContent = document.getElementById('video-modal-content');
 
-  // ---- RADIAL CAROUSEL NAVIGATION ----
+  // ---- CENTERED MENU NAVIGATION ----
   const navCarousel = document.getElementById('nav-carousel');
   const navFab = document.getElementById('nav-carousel-fab');
   const navOverlay = document.getElementById('nav-carousel-overlay');
@@ -22,91 +22,33 @@
   if (navCarousel && navFab && navItems.length) {
     let isOpen = false;
 
-    // Radial positioning parameters
-    const RADIUS_DESKTOP = 210;
-    const RADIUS_MOBILE = 150;
-    // Arc opening from ~200° to ~80° (120° total) 
-    // Slightly past left and slightly past vertical for a wider, more elegant fan
-    const START_ANGLE = (200 / 180) * Math.PI;  // 200° — slightly below-left
-    const END_ANGLE = (80 / 180) * Math.PI;     // 80° — slightly past vertical
-    const TOTAL_ARC = START_ANGLE - END_ANGLE;   // 120° = 2π/3 radians
-
-    function getRadius() {
-      return window.innerWidth <= 768 ? RADIUS_MOBILE : RADIUS_DESKTOP;
-    }
-
-    function positionItems(open) {
-      const radius = getRadius();
-      const itemCount = navItems.length;
-      // FAB center offset (items are positioned relative to nav-carousel which has FAB at bottom-right)
-      // FAB size / 2 to center the arc on the FAB
-      const fabSize = window.innerWidth <= 768 ? 50 : 58;
-      const itemSize = window.innerWidth <= 768 ? 42 : 48;
-      const fabCenterX = fabSize / 2;
-      const fabCenterY = fabSize / 2;
-
-      navItems.forEach((item, index) => {
-        if (open) {
-          // Distribute items evenly across the arc (from 180° down to 90°)
-          const angle = START_ANGLE - (TOTAL_ARC / (itemCount - 1)) * index;
-          const x = Math.cos(angle) * radius; // negative (pointing left) to 0 (pointing up)
-          const y = Math.sin(angle) * radius;  // 0 (pointing left) to positive (pointing up)
-
-          // CSS 'right' increases leftward, CSS 'bottom' increases upward
-          // -x is positive (since cos is negative for our angles) → items go left ✓
-          // +y is positive (since sin is positive for our angles) → items go up ✓
-          const offsetRight = -x + (fabSize - itemSize) / 2;
-          const offsetBottom = y + (fabSize - itemSize) / 2;
-
-          item.style.right = offsetRight + 'px';
-          item.style.bottom = offsetBottom + 'px';
-          item.style.transitionDelay = (index * 0.04) + 's';
-        } else {
-          // Collapse back to FAB center
-          item.style.right = ((fabSize - itemSize) / 2) + 'px';
-          item.style.bottom = ((fabSize - itemSize) / 2) + 'px';
-          item.style.transitionDelay = ((navItems.length - 1 - index) * 0.025) + 's';
-        }
-      });
-    }
-
-    function toggleCarousel() {
+    function toggleMenu() {
       isOpen = !isOpen;
       navCarousel.classList.toggle('is-open', isOpen);
       navOverlay.classList.toggle('is-open', isOpen);
       navFab.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       navFab.setAttribute('aria-label', isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
-      positionItems(isOpen);
     }
 
-    function closeCarousel() {
+    function closeMenu() {
       if (isOpen) {
         isOpen = false;
         navCarousel.classList.remove('is-open');
         navOverlay.classList.remove('is-open');
         navFab.setAttribute('aria-expanded', 'false');
         navFab.setAttribute('aria-label', 'Abrir menú de navegación');
-        positionItems(false);
       }
     }
 
-    // Initialize positions (collapsed)
-    positionItems(false);
-
     // FAB click
-    navFab.addEventListener('click', toggleCarousel);
+    navFab.addEventListener('click', toggleMenu);
 
     // Overlay click closes
-    navOverlay.addEventListener('click', closeCarousel);
+    navOverlay.addEventListener('click', closeMenu);
 
     // Escape key closes
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeCarousel();
-    });
-
-    // Recalculate positions on resize
-    window.addEventListener('resize', function () {
-      if (isOpen) positionItems(true);
+      if (e.key === 'Escape') closeMenu();
     });
 
     // ---- Section detection (IntersectionObserver) ----
@@ -150,8 +92,8 @@
           e.preventDefault();
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-        // Close carousel after navigation
-        closeCarousel();
+        // Close menu after navigation
+        closeMenu();
       });
     });
 
