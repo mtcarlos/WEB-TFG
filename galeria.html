@@ -53,45 +53,27 @@
       <h1 class="gallery-hero__watermark">ARCHIVE</h1>
 
       <div class="gallery-hero__layout">
-        <!-- TITULO INTERACTIVO (Mazo Polaroid) -->
-        <div class="gallery-polaroid-title">
-          <div class="polaroid-card polaroid-card--letter" style="--i: 0; --r: -2deg;">
-            <div class="polaroid-tape-mini"></div>
-            <div class="polaroid-card__inner">G</div>
-          </div>
-          <div class="polaroid-card polaroid-card--letter" style="--i: 1; --r: 4deg;">
-            <div class="polaroid-tape-mini"></div>
-            <div class="polaroid-card__inner">A</div>
-          </div>
-          <div class="polaroid-card polaroid-card--letter" style="--i: 2; --r: -1deg;">
-            <div class="polaroid-tape-mini"></div>
-            <div class="polaroid-card__inner">L</div>
-          </div>
-          <div class="polaroid-card polaroid-card--letter" style="--i: 3; --r: 3deg;">
-            <div class="polaroid-tape-mini"></div>
-            <div class="polaroid-card__inner">E</div>
-          </div>
-          <div class="polaroid-card polaroid-card--letter" style="--i: 4; --r: -5deg;">
-            <div class="polaroid-tape-mini"></div>
-            <div class="polaroid-card__inner">R</div>
-          </div>
-          <div class="polaroid-card polaroid-card--letter" style="--i: 5; --r: 2deg;">
-            <div class="polaroid-tape-mini"></div>
-            <div class="polaroid-card__inner">Í</div>
-          </div>
-          <div class="polaroid-card polaroid-card--letter" style="--i: 6; --r: -3deg;">
-            <div class="polaroid-tape-mini"></div>
-            <div class="polaroid-card__inner">A</div>
-          </div>
-
-          <div class="polaroid-card polaroid-card--image" style="--i: 7; --r: 6deg;">
-            <div class="polaroid-tape-mini"></div>
-            <div class="polaroid-card__inner">
-              <img src="assets/PERSONAJE_SALUDO.png" alt="Personaje VR Code City">
-            </div>
-            <div class="polaroid-card__caption">Captured in VR</div>
-          </div>
+        <!-- LOGO VR CODE CITY -->
+        <div class="gallery-hero-logo" style="cursor: pointer;" onclick="playLogoAnimation()">
+          <img id="static-logo" src="assets/VR_Code_City_logo.png" alt="VR Code City Logo" style="max-width: 400px; width: 100%; height: auto; display: block; margin: 0 auto;">
+          <video id="animated-logo" src="assets/Logo_animation.mp4" style="max-width: 400px; width: 100%; height: auto; display: none; margin: 0 auto;" muted playsinline></video>
         </div>
+        <script>
+          function playLogoAnimation() {
+            const img = document.getElementById('static-logo');
+            const vid = document.getElementById('animated-logo');
+            if (vid.style.display === 'none') {
+              img.style.display = 'none';
+              vid.style.display = 'block';
+              vid.currentTime = 0;
+              vid.play();
+              vid.onended = function() {
+                vid.style.display = 'none';
+                img.style.display = 'block';
+              };
+            }
+          }
+        </script>
 
       </div>
     </div>
@@ -195,8 +177,8 @@
         <div class="gallery-card gallery-card--4col" data-index="4"
           data-comment="Sesión multijugador: ¡mis amigos también recorren la ciudad!">
           <span class="gallery-card__number">05</span>
-          <img src="assets/city/multiplayer.png"
-            alt="Sesión multijugador con avatares en la ciudad VR" class="gallery-card__image">
+          <img src="assets/city/multiplayer.png" alt="Sesión multijugador con avatares en la ciudad VR"
+            class="gallery-card__image">
           <div class="gallery-card__overlay">
             <span class="gallery-card__caption">Multijugador — Avatares</span>
           </div>
