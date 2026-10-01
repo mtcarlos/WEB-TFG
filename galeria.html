@@ -50,14 +50,18 @@
     <div class="page-container" style="position: relative;">
 
       <!-- GIANT WATERMARK -->
-      <h1 class="gallery-hero__watermark">ARCHIVE</h1>
+      <div class="gallery-hero__watermark-container">
+        <h1 class="gallery-hero__watermark">GALERÍA</h1>
+      </div>
 
       <div class="gallery-hero__layout">
         <!-- LOGO VR CODE CITY -->
         <div class="gallery-hero-logo" style="cursor: pointer;" onclick="playLogoAnimation()">
-          <img id="static-logo" src="assets/VR_Code_City_logo.png" alt="VR Code City Logo" style="max-width: 400px; width: 100%; height: auto; display: block; margin: 0 auto;">
-          <video id="animated-logo" src="assets/Logo_animation.mp4" style="max-width: 400px; width: 100%; height: auto; display: none; margin: 0 auto;" muted playsinline></video>
+          <img id="static-logo" src="assets/VR_Code_City_logo.png" alt="VR Code City Logo" style="max-width: 400px; width: 100%; height: auto; display: block; margin: 0 auto; filter: drop-shadow(0 20px 25px rgba(0,0,0,0.2));">
+          <video id="animated-logo" src="assets/Logo_animation.mp4" style="max-width: 400px; width: 100%; height: auto; display: none; margin: 0 auto; filter: drop-shadow(0 20px 25px rgba(0,0,0,0.2));" muted playsinline></video>
         </div>
+        
+
         <script>
           function playLogoAnimation() {
             const img = document.getElementById('static-logo');
