@@ -307,11 +307,14 @@
 
       buildings.push({
         mesh: mesh,
+        edges: edges,
         baseScaleX: scaleX,
         baseScaleY: scaleY,
         baseScaleZ: scaleZ,
+        basePosY: mesh.position.y,
         phase: Math.random() * Math.PI * 2,
-        speed: 1.5 + Math.random() * 2 // Animation speed
+        speed: 1.5 + Math.random() * 2, // Animation speed
+        hoverTargetY: 0
       });
     }
     scene.add(group);
@@ -328,9 +331,18 @@
     const windowHalfX = window.innerWidth / 2;
     const windowHalfY = window.innerHeight / 2;
 
+    // Interactivity Raycaster variables
+    const raycaster = new THREE.Raycaster();
+    const mouseVector = new THREE.Vector2(-1000, -1000);
+    const interactPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+    const intersectionPoint = new THREE.Vector3();
+
     document.addEventListener('mousemove', (event) => {
       mouseX = (event.clientX - windowHalfX) * 0.0015;
       mouseY = (event.clientY - windowHalfY) * 0.0015;
+
+      mouseVector.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouseVector.y = -(event.clientY / window.innerHeight) * 2 + 1;
     });
 
     window.addEventListener('resize', () => {
@@ -357,8 +369,42 @@
       camera.position.y += (-targetY * 10 - camera.position.y + 8) * 0.05;
       camera.lookAt(scene.position);
 
-      // SQUASH AND STRETCH (Rubber-hose animation)
+      // Raycast to find mouse position on the imaginary floor
+      raycaster.setFromCamera(mouseVector, camera);
+      raycaster.ray.intersectPlane(interactPlane, intersectionPoint);
+
+      // Convert intersection point to group's local space (because group rotates)
+      group.worldToLocal(intersectionPoint);
+
+      const hoverRadius = 18;
+      const redColor = new THREE.Color(0xE63946);
+      const blackColor = new THREE.Color(0x000000);
+
+      // SQUASH AND STRETCH + MAGNETIC HOVER
       buildings.forEach(b => {
+        // Calculate distance from mouse intersection to building
+        const dx = b.mesh.position.x - intersectionPoint.x;
+        const dz = b.mesh.position.z - intersectionPoint.z;
+        const dist = Math.sqrt(dx * dx + dz * dz);
+
+        const isNear = dist < hoverRadius;
+
+        // Target hover height and color falloff
+        let targetHoverY = 0;
+        let targetColor = blackColor;
+
+        if (isNear) {
+          const falloff = Math.pow(1 - (dist / hoverRadius), 1.5); // Ease out
+          targetHoverY = falloff * 5; // Lift up to 5 units
+
+          // Create a new color by cloning black and lerping towards red based on falloff
+          targetColor = blackColor.clone().lerp(redColor, falloff * 1.5);
+        }
+
+        // Smoothly interpolate current values towards targets
+        b.hoverTargetY += (targetHoverY - b.hoverTargetY) * 0.1;
+        b.edges.material.color.lerp(targetColor, 0.1);
+
         // Sine wave oscillating between -1 and 1
         const wave = Math.sin(time * b.speed + b.phase);
 
@@ -369,6 +415,9 @@
         b.mesh.scale.y = b.baseScaleY * stretchY;
         b.mesh.scale.x = b.baseScaleX * squashXZ;
         b.mesh.scale.z = b.baseScaleZ * squashXZ;
+
+        // Apply base position + hover lift offset
+        b.mesh.position.y = b.basePosY + b.hoverTargetY;
       });
 
       renderer.render(scene, camera);

@@ -7,7 +7,7 @@
 /* ======== GALLERY HERO (POLAROID) ======== */
 .gallery-hero {
   position: relative;
-  min-height: 90vh; 
+  min-height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,34 +15,20 @@
   padding-bottom: var(--spacing-60);
   overflow: hidden;
   background-color: var(--color-newsprint-gray);
-  background-image: linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-  background-size: 40px 40px;
   color: var(--color-charcoal-ink);
 }
 
-.gallery-hero__watermark-container {
+#gallery-hero-canvas {
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 0;
   width: 100%;
-  transform: translateY(-50%);
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.gallery-hero__watermark {
-  font-family: var(--font-heading);
-  font-size: clamp(100px, 22vw, 400px);
-  font-weight: 800;
-  line-height: 0.8;
-  color: transparent;
-  -webkit-text-stroke: 2px rgba(0, 0, 0, 0.1);
-  letter-spacing: -0.02em;
-  user-select: none;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.8;
+  /* Fade out at the bottom so it blends with the white page */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
 }
 
 .gallery-hero__layout {
@@ -57,11 +43,45 @@
 
 .gallery-hero-logo {
   animation: floatLogo 4s ease-in-out infinite;
+  cursor: pointer;
+  /* Cinematic Integration (Option 4) */
+  mix-blend-mode: hard-light;
+  opacity: 0.9;
+  /* Slight scale to make it commanding */
+  transform: scale(1.05);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.gallery-hero-logo:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.gallery-hero-logo img,
+.gallery-hero-logo video {
+  max-width: 420px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  /* Soft inner glow instead of black shadow */
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
+}
+
+#animated-logo {
+  display: none;
 }
 
 @keyframes floatLogo {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
 }
 
 
